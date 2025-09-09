@@ -16,12 +16,20 @@ const InstallPWA = () => {
     const installedHandler = () => {
       setIsInstalled(true);
       setIsInstallable(false);
+      // Ocultar el mensaje después de 3 segundos
+      setTimeout(() => {
+        setIsInstalled(false);
+      }, 3000);
     };
 
     // Detectar si ya está instalada
     const checkIfInstalled = () => {
       if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
         setIsInstalled(true);
+        // Ocultar el mensaje después de 2 segundos si ya está instalada
+        setTimeout(() => {
+          setIsInstalled(false);
+        }, 2000);
         return;
       }
       
