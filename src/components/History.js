@@ -31,6 +31,9 @@ const History = ({ setActiveSection, setInitialSearch }) => {
       } else if (item.type === 'vacunacion') {
         setInitialSearch(item.name);
         setActiveSection('vacunacion');
+      } else if (item.type === 'algoritmo') {
+        setInitialSearch(item.name);
+        setActiveSection('algoritmos');
       }
     }
   };
@@ -47,6 +50,7 @@ const History = ({ setActiveSection, setInitialSearch }) => {
       case 'protocolo': return '📋';
       case 'emergencia': return '🚨';
       case 'vacunacion': return '💉';
+      case 'algoritmo': return '🚨';
       default: return '📝';
     }
   };
@@ -58,6 +62,7 @@ const History = ({ setActiveSection, setInitialSearch }) => {
       case 'protocolo': return 'Protocolo';
       case 'emergencia': return 'Emergencia';
       case 'vacunacion': return 'Vacunación';
+      case 'algoritmo': return 'Algoritmo';
       default: return 'Consulta';
     }
   };

@@ -59,6 +59,12 @@ const Header = ({ activeSection, setActiveSection }) => {
               Emergencias
             </button>
             <button 
+              className={`nav-btn ${activeSection === 'algoritmos' ? 'active' : ''}`}
+              onClick={() => handleNavClick('algoritmos')}
+            >
+              Algoritmos
+            </button>
+            <button 
               className={`nav-btn ${activeSection === 'vacunacion' ? 'active' : ''}`}
               onClick={() => handleNavClick('vacunacion')}
             >
