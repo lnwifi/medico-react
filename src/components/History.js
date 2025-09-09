@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from '../contexts/HistoryContext';
 import { useTheme } from '../contexts/ThemeContext';
+import ConsultationModal from './ConsultationModal';
 
 const History = ({ setActiveSection, setInitialSearch }) => {
   const { consultHistory, clearHistory, removeFromHistory } = useHistory();
   const { colors } = useTheme();
+  const [selectedConsultation, setSelectedConsultation] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleItemClick = (item) => {
-    if (item.type === 'medicamento') {
-      setInitialSearch(item.name);
-      setActiveSection('calculadora');
-    } else if (item.type === 'diagnostico') {
-      setInitialSearch(item.name);
-      setActiveSection('diagnosticos');
-    } else if (item.type === 'protocolo') {
-      setInitialSearch(item.name);
-      setActiveSection('protocolos');
-    } else if (item.type === 'emergencia') {
-      setInitialSearch(item.name);
-      setActiveSection('emergencias');
+    // Si tiene datos completos, mostrar modal
+    if (item.fullData) {
+      setSelectedConsultation(item);
+      setShowModal(true);
+    } else {
+      // Fallback al comportamiento anterior
+      if (item.type === 'medicamento') {
+        setInitialSearch(item.name);
+        setActiveSection('calculadora');
+      } else if (item.type === 'diagnostico') {
+        setInitialSearch(item.name);
+        setActiveSection('diagnosticos');
+      } else if (item.type === 'protocolo') {
+        setInitialSearch(item.name);
+        setActiveSection('protocolos');
+      } else if (item.type === 'emergencia') {
+        setInitialSearch(item.name);
+        setActiveSection('emergencias');
+      }
     }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedConsultation(null);
   };
 
   const getTypeIcon = (type) => {
@@ -134,12 +149,38 @@ const History = ({ setActiveSection, setInitialSearch }) => {
                       gap: '15px', 
                       marginTop: '5px',
                       fontSize: '14px',
-                      color: colors.textSecondary
+                      color: colors.textSecondary,
+                      alignItems: 'center'
                     }}>
                       <span>{getTypeName(item.type)}</span>
                       <span>•</span>
                       <span>{item.date}</span>
+                      {item.fullData && (
+                        <>
+                          <span>•</span>
+                          <span style={{ 
+                            backgroundColor: colors.primary,
+                            color: 'white',
+                            padding: '2px 6px',
+                            borderRadius: '10px',
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                          }}>
+                            DETALLADO
+                          </span>
+                        </>
+                      )}
                     </div>
+                    {item.details && (
+                      <div style={{
+                        fontSize: '13px',
+                        color: colors.textSecondary,
+                        marginTop: '3px',
+                        fontStyle: 'italic'
+                      }}>
+                        {item.details}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <button
@@ -172,6 +213,13 @@ const History = ({ setActiveSection, setInitialSearch }) => {
           </div>
         )}
       </div>
+
+      {/* Modal para mostrar detalles de la consulta */}
+      <ConsultationModal 
+        consultation={selectedConsultation}
+        isOpen={showModal}
+        onClose={closeModal}
+      />
     </div>
   );
 };

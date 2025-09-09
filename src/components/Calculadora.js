@@ -10,7 +10,6 @@ import {
 } from '../data/medicamentos';
 
 const Calculadora = ({ initialSearch, setInitialSearch }) => {
-  const { colors } = useTheme();
   const { addToHistory } = useHistory();
   const [peso, setPeso] = useState('');
   const [edad, setEdad] = useState('');
@@ -19,7 +18,6 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
   const [resultado, setResultado] = useState(null);
   const [error, setError] = useState('');
   const [presentaciones, setPresentaciones] = useState([]);
-  const [busqueda, setBusqueda] = useState('');
 
   // Actualizar presentaciones cuando cambia el medicamento
   useEffect(() => {
@@ -45,7 +43,6 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
   // Manejar búsqueda inicial desde historial
   useEffect(() => {
     if (initialSearch) {
-      setBusqueda(initialSearch);
       const medicamentoEncontrado = Object.keys(medicamentosDB).find(key => 
         medicamentosDB[key].nombre.toLowerCase().includes(initialSearch.toLowerCase())
       );
@@ -120,11 +117,31 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
       fecha: new Date()
     });
 
-    // Agregar al historial
+    // Agregar al historial con información completa
+    const presentacionData = med.presentaciones?.[presentacionKey] || med.dispositivos?.[presentacionKey];
     addToHistory({
       type: 'medicamento',
       name: med.nombre,
-      details: `${pesoNum}kg - ${resultadoCalculo.dosisMl}ml`
+      details: `${pesoNum}kg - ${resultadoCalculo.dosisMl}ml`,
+      fullData: {
+        peso: pesoNum,
+        edad: edad,
+        medicamento: med.nombre,
+        medicamentoKey: medicamentoKey,
+        presentacion: presentacionData?.nombre || 'N/A',
+        presentacionKey: presentacionKey,
+        dosis: {
+          dosisMg: resultadoCalculo.dosisMg,
+          dosisMl: resultadoCalculo.dosisMl,
+          volumenMl: resultadoCalculo.volumenMl,
+          concentracion: resultadoCalculo.concentracion,
+          intervalo: resultadoCalculo.intervalo,
+          maxDosis: resultadoCalculo.maxDosis
+        },
+        indicaciones: med.indicaciones,
+        validacion: validacion,
+        indicacion: indicacion
+      }
     });
   };
 
