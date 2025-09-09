@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './styles.css';
+import Header from './components/Header';
+import Calculadora from './components/Calculadora';
+import Diagnosticos from './components/Diagnosticos';
+import DiagnosticoAvanzado from './components/DiagnosticoAvanzado';
+import Protocolos from './components/Protocolos';
+import Emergencias from './components/Emergencias';
+import Footer from './components/Footer';
+import InstallPWA from './components/InstallPWA';
 
 function App() {
+  const [activeSection, setActiveSection] = useState('calculadora');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header activeSection={activeSection} setActiveSection={setActiveSection} />
+      
+      <main className="main">
+        {activeSection === 'calculadora' && <Calculadora />}
+        {activeSection === 'diagnosticos' && <Diagnosticos />}
+        {activeSection === 'diagnostico-avanzado' && <DiagnosticoAvanzado />}
+        {activeSection === 'protocolos' && <Protocolos />}
+        {activeSection === 'emergencias' && <Emergencias />}
+      </main>
+      
+      <Footer />
+      <InstallPWA />
     </div>
   );
 }

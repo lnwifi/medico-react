@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "PediaEmergencias",
+  "name": "Sistema de Emergencias Médicas Pediátricas - Argentina",
+  "description": "Calculadora de dosis, diagnósticos y protocolos de emergencia pediátrica",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +11,40 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "maskable any"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable any"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#2196F3",
+  "background_color": "#f4f4f4",
+  "orientation": "portrait-primary",
+  "categories": ["medical", "health", "utilities"],
+  "lang": "es-AR",
+  "dir": "ltr",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Calculadora de Dosis",
+      "short_name": "Calculadora",
+      "description": "Calcular dosis pediátricas",
+      "url": "/?section=calculadora",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Emergencias",
+      "short_name": "Emergencias",
+      "description": "Protocolos de emergencia",
+      "url": "/?section=emergencias",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
 }

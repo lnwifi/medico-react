@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# 🏥 PediaEmergencias AR - PWA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sistema de Emergencias Médicas Pediátricas para Argentina desarrollado en React como Progressive Web App (PWA).
 
 ## Available Scripts
 

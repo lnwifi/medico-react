@@ -1,0 +1,1630 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.header {
+    background-color: #2196F3;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.nav-btn {
+    background-color: #1976D2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover, .nav-btn.active {
+    background-color: #0D47A1;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 8px;
+    gap: 4px;
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.section {
+    display: none;
+    padding: 40px 0;
+    background-color: white;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.section.active {
+    display: block;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    color: #2196F3;
+    font-size: 2.2em;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+.calculator-form, .search-form, .diagnostico-avanzado-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="number"],
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+}
+
+.btn-secondary {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #da190b;
+}
+
+.resultado-card {
+    background-color: #e3f2fd;
+    border: 1px solid #90CAF9;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.resultado-card h3 {
+    color: #1976D2;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.dosis-info {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.dosis-info:last-child {
+    border-bottom: none;
+}
+
+.dosis-info p {
+    margin: 5px 0;
+}
+
+.dosis-valor {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.alerta {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.alerta.peligro {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.alerta ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.alerta li {
+    margin-bottom: 5px;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+/* Diagnósticos */
+.search-form {
+    margin-bottom: 30px;
+}
+
+.resultados-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.diagnostico-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.diagnostico-item h4 {
+    color: #2196F3;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.diagnostico-item.urgente {
+    border-left: 5px solid #f44336;
+}
+
+.diagnostico-item.alta {
+    border-left: 5px solid #FF9800;
+}
+
+.diagnostico-item.media {
+    border-left: 5px solid #FFEB3B;
+}
+
+.diagnostico-item.baja {
+    border-left: 5px solid #4CAF50;
+}
+
+.diagnostico-sintomas {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* Diagnóstico Avanzado */
+.paso-diagnostico {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.paso-diagnostico h3 {
+    color: #2196F3;
+    margin-bottom: 20px;
+}
+
+.sintomas-grid, .signos-alarma-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.categoria-sintomas, .signos-categoria {
+    background-color: #e3f2fd;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.categoria-sintomas h4, .signos-categoria h4 {
+    color: #1976D2;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.categoria-sintomas label, .signos-categoria label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.resultado-diagnostico-avanzado {
+    background-color: #e8f5e9;
+    border: 1px solid #C8E6C9;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.diagnostico-principal {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.confianza {
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+.confianza-muy-alta { background-color: #28a745; }
+.confianza-alta { background-color: #4CAF50; }
+.confianza-media { background-color: #FFC107; color: #333; }
+.confianza-baja { background-color: #FF9800; }
+.confianza-muy-baja { background-color: #f44336; }
+
+.alertas-criticas {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.plan-tratamiento, .diagnosticos-diferenciales, .seguimiento {
+    background-color: #f0f8ff;
+    border: 1px solid #b3e5fc;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.plan-tratamiento h4, .diagnosticos-diferenciales h4, .seguimiento h4 {
+    color: #1976D2;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.plan-tratamiento ul, .seguimiento ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.diagnostico-diferencial {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 10px;
+}
+
+/* Protocolos */
+.protocolos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.protocolo-card {
+    background-color: #e0f2f7;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.protocolo-card:hover {
+    background-color: #b3e5fc;
+    transform: translateY(-5px);
+}
+
+.protocolo-card h3 {
+    color: #0277bd;
+    margin-bottom: 10px;
+}
+
+.protocolo-detalle {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.protocolo-detalle h3 {
+    color: #0277bd;
+    margin-bottom: 20px;
+}
+
+.protocolo-detalle .paso {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border-left: 5px solid #03A9F4;
+}
+
+.protocolo-detalle .paso h4 {
+    color: #0288D1;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.protocolo-detalle .paso ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.btn-cerrar {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    float: right;
+}
+
+/* Emergencias */
+.emergency-numbers {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.emergency-numbers h3 {
+    color: #D32F2F;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    text-align: center;
+}
+
+.number-card {
+    background-color: #ffebee;
+    border: 1px solid #EF9A9A;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.number-card .number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #D32F2F;
+}
+
+.number-card .service {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.number-card.same {
+    background-color: #e0f2f7;
+    border-color: #81D4FA;
+}
+
+.number-card.same .number {
+    color: #0288D1;
+}
+
+.emergencias-container {
+    display: grid;
+    gap: 20px;
+}
+
+.emergencia-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.emergencia-item.critica .emergencia-header {
+    background-color: #D32F2F;
+    color: white;
+}
+
+.emergencia-item.alta .emergencia-header {
+    background-color: #FF9800;
+    color: white;
+}
+
+.emergencia-item.media .emergencia-header {
+    background-color: #FFEB3B;
+    color: #333;
+}
+
+.emergencia-header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.emergencia-icon {
+    font-size: 3em;
+    margin-right: 15px;
+}
+
+.emergencia-info h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.emergencia-info p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+}
+
+.tiempo-critico {
+    display: block;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.emergencia-actions {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+.quick-steps {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.quick-steps .step {
+    background-color: #e0f7fa;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #00838F;
+}
+
+.btn-protocolo {
+    background-color: #03A9F4;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-protocolo:hover {
+    background-color: #0288D1;
+}
+
+.dosis-emergencia {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+
+.dosis-emergencia h3 {
+    color: #D32F2F;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.calc-rapida {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.calc-rapida input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.calc-rapida button {
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calc-rapida button:hover {
+    background-color: #E64A19;
+}
+
+.resultado-rapido {
+    background-color: #fff8e1;
+    border: 1px solid #FFECB3;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.resultado-rapido h4 {
+    color: #FFC107;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.protocolo-detalle-nuevo {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+
+.protocolo-detalle-nuevo h3 {
+    color: #0277bd;
+    margin-bottom: 20px;
+}
+
+.alerta-critica-nueva {
+    background-color: #fbe9e7;
+    border: 1px solid #ffccbc;
+    color: #D32F2F;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.protocolo-paso {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border-left: 5px solid #9E9E9E;
+}
+
+.protocolo-paso-header {
+    font-weight: bold;
+    color: #424242;
+    margin-bottom: 10px;
+}
+
+.protocolo-paso-content ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.medicamento-destacado {
+    background-color: #e8f5e9;
+    border-left: 5px solid #4CAF50;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* Estilos específicos para protocolos detallados */
+.protocolo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2196F3;
+    padding-bottom: 15px;
+}
+
+.protocolo-header h3 {
+    margin: 0;
+    color: #2196F3;
+    font-size: 1.5em;
+}
+
+.btn-cerrar {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-cerrar:hover {
+    background-color: #d32f2f;
+}
+
+.protocolo-content {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.protocolo-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.step-group {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    border-left: 4px solid #2196F3;
+}
+
+.step-group h4 {
+    color: #1976d2;
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.step-group.urgente {
+    background-color: #ffeaa7;
+    border-left-color: #e17055;
+}
+
+.step-group.urgente h4 {
+    color: #d63031;
+}
+
+.step-group ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.step-group li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.rcp-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.edad-group {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+.edad-group strong {
+    color: #1976d2;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.dosis-table {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dosis-table div {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dosis-table div:last-child {
+    border-bottom: none;
+}
+
+.criterios {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    line-height: 1.6;
+}
+
+.dosis-adrenalina {
+    background-color: #fff3e0;
+    border: 2px solid #ff9800;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.dosis-adrenalina div {
+    margin: 5px 0;
+    color: #e65100;
+}
+
+.warning-box {
+    background-color: #ffebee;
+    border: 2px solid #f44336;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.warning-box h4 {
+    color: #c62828;
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+}
+
+.warning-box p {
+    color: #d32f2f;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* RESPONSIVE DESIGN - MOBILE FIRST */
+
+/* Tipografía base responsive */
+html {
+    font-size: 16px;
+}
+
+body {
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin-bottom: 0.75em;
+}
+
+/* Escalado fluido de texto */
+@media (max-width: 575.98px) {
+    html {
+        font-size: 14px;
+    }
+    
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+    h4 { font-size: 1.1rem; }
+    
+    p, li, td {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    html {
+        font-size: 15px;
+    }
+    
+    h1 { font-size: 1.9rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.4rem; }
+    h4 { font-size: 1.2rem; }
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1200px) {
+    html {
+        font-size: 17px;
+    }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .container {
+        width: 95%;
+        padding: 10px 0;
+    }
+
+    .header {
+        padding: 10px 0;
+    }
+
+    .header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 1.4em;
+        margin-bottom: 0;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        z-index: 1001;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: #1976D2;
+        flex-direction: column;
+        padding: 80px 20px 20px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    }
+
+    .nav.active {
+        left: 0;
+    }
+
+    .nav-btn {
+        display: block;
+        padding: 15px 20px;
+        margin: 5px 0;
+        font-size: 1em;
+        white-space: normal;
+        text-align: left;
+        width: 100%;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+        background-color: #0D47A1;
+        transform: translateX(5px);
+    }
+
+    /* Overlay for mobile menu */
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .section {
+        padding: 20px 0;
+        margin-top: 10px;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+        font-size: 1rem;
+        padding: 0 10px;
+        line-height: 1.4;
+    }
+
+    .calculator-form, 
+    .search-form, 
+    .diagnostico-avanzado-form {
+        max-width: none;
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .form-group input[type="number"],
+    .form-group input[type="text"],
+    .form-group select,
+    .form-group textarea {
+        width: calc(100% - 20px);
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .btn-primary, 
+    .btn-secondary {
+        padding: 14px 20px;
+        font-size: 1.1em;
+        margin-top: 15px;
+    }
+
+    .resultado-card {
+        margin: 15px 10px;
+        padding: 15px;
+    }
+
+    .dosis-info {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .dosis-valor {
+        font-size: 1.2em;
+    }
+
+    /* Grid layouts responsive */
+    .resultados-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin: 0 10px;
+    }
+
+    .diagnostico-item {
+        padding: 15px;
+    }
+
+    .sintomas-grid, 
+    .signos-alarma-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .categoria-sintomas, 
+    .signos-categoria {
+        padding: 12px;
+    }
+
+    .form-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-navigation .btn-secondary,
+    .form-navigation .btn-primary {
+        width: 100%;
+    }
+
+    .protocolos-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin: 0 10px;
+    }
+
+    .protocolo-card {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    /* Emergency numbers */
+    .numbers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .number-card {
+        padding: 12px;
+    }
+
+    .number-card .number {
+        font-size: 1.6em;
+    }
+
+    .emergencias-container {
+        gap: 15px;
+        margin: 0 10px;
+    }
+
+    .emergencia-header {
+        padding: 12px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .emergencia-icon {
+        font-size: 2.5em;
+        margin-right: 0;
+    }
+
+    .emergencia-info h3 {
+        font-size: 1.2em;
+    }
+
+    .quick-steps {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .quick-steps .step {
+        padding: 10px 12px;
+        text-align: center;
+        font-size: 0.85em;
+    }
+
+    .calc-rapida {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .protocolo-detalle-nuevo {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .protocolo-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .btn-cerrar {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .protocolo-detalle-nuevo h3 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .protocolo-content {
+        max-height: 60vh;
+        padding-right: 0;
+    }
+
+    .step-group {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .step-group h4 {
+        font-size: 1em;
+    }
+
+    .rcp-details {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .edad-group {
+        padding: 12px;
+    }
+
+    .dosis-table {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+    .dosis-adrenalina {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+    .warning-box {
+        padding: 15px;
+        margin-top: 15px;
+    }
+
+    .warning-box h4 {
+        font-size: 1.1em;
+    }
+
+    .alerta-critica-nueva {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .medicamento-destacado {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+    /* Optimización específica de formularios móviles */
+    .form-group label {
+        font-size: 1em;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    .form-group input[type="number"],
+    .form-group input[type="text"],
+    .form-group select,
+    .form-group textarea {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 8px;
+        border: 2px solid #ddd;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        outline: none;
+    }
+
+    .form-group select {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 20px;
+        padding-right: 45px;
+    }
+
+    /* Mejorar checkboxes para móvil */
+    .categoria-sintomas input[type="checkbox"],
+    .signos-categoria input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        margin-top: 2px;
+        accent-color: #2196F3;
+    }
+
+    /* Botones más grandes y touch-friendly */
+    .btn-primary, 
+    .btn-secondary,
+    .btn-protocolo {
+        min-height: 48px;
+        font-weight: 600;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:active,
+    .btn-secondary:active,
+    .btn-protocolo:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Mejoras para textarea */
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+        line-height: 1.5;
+    }
+
+    /* Espaciado mejorado entre elementos del formulario */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group:last-child {
+        margin-bottom: 25px;
+    }
+
+    /* Mejorar legibilidad de placeholders */
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: #999;
+        font-size: 0.95em;
+    }
+
+    /* Estados de validación para formularios */
+    .form-group input:invalid {
+        border-color: #f44336;
+    }
+
+    .form-group input:valid {
+        border-color: #4CAF50;
+    }
+
+    /* Mejoras para tablas y contenido tabulado */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 15px 0;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    /* Optimización de dosis de emergencia grid */
+    .resultado-rapido > div[style*="grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .resultado-rapido > div[style*="grid"] > div {
+        padding: 12px !important;
+        border-radius: 6px !important;
+        font-size: 0.9em;
+    }
+
+    /* Protocolos detallados - mejorar legibilidad en móvil */
+    .protocolo-paso-content ul {
+        margin-left: 15px;
+        line-height: 1.6;
+    }
+
+    .protocolo-paso-content li {
+        margin-bottom: 8px;
+        padding-left: 5px;
+    }
+
+    /* Mejorar spacing de cards */
+    .diagnostico-item,
+    .protocolo-card,
+    .emergencia-item,
+    .number-card {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 12px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .protocolo-card:active,
+    .emergencia-item:active {
+        transform: scale(0.98);
+    }
+
+    /* Mejorar el grid de resultados */
+    .resultado-diagnostico-avanzado,
+    .resultado-card {
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Sticky header para formularios largos */
+    .paso-diagnostico h3 {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 10;
+        padding: 15px 20px 10px;
+        margin: -20px -20px 15px;
+        border-bottom: 2px solid #e3f2fd;
+        border-radius: 8px 8px 0 0;
+    }
+
+    /* Optimizaciones específicas para emergencias móviles */
+    .emergency-numbers {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .emergency-numbers h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .number-card .number {
+        font-size: 1.8rem;
+        line-height: 1;
+    }
+
+    .number-card .service {
+        font-size: 0.8rem;
+        margin-top: 4px;
+    }
+
+    /* Mejorar legibilidad de protocolos críticos */
+    .alerta-critica-nueva h4 {
+        font-size: 1.1rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+
+    .alerta-critica-nueva p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    .protocolo-paso-header {
+        font-size: 1rem;
+        line-height: 1.3;
+        padding: 8px 0;
+    }
+
+    /* Mejorar dosis de emergencia en móvil */
+    .dosis-emergencia {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .dosis-emergencia h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .calc-rapida input {
+        font-size: 1rem;
+        min-height: 44px;
+    }
+
+    .calc-rapida button {
+        font-size: 0.95rem;
+        min-height: 44px;
+        padding: 12px 16px;
+        white-space: nowrap;
+    }
+
+    /* Optimizar tiempo crítico */
+    .tiempo-critico {
+        font-size: 0.85rem;
+        background-color: rgba(255,255,255,0.2);
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-top: 6px;
+    }
+
+    /* Hacer más prominentes los pasos de emergencia */
+    .quick-steps .step {
+        background-color: #fff;
+        color: #0288D1;
+        border: 2px solid #e0f7fa;
+        font-weight: 600;
+    }
+
+    /* Mejorar contraste en protocolos */
+    .medicamento-destacado {
+        border-left-width: 4px;
+        font-weight: 500;
+    }
+
+    .medicamento-destacado strong {
+        color: #2E7D32;
+        font-size: 1.05em;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .container {
+        width: 92%;
+    }
+
+    .logo {
+        font-size: 1.6em;
+    }
+
+    .nav-btn {
+        padding: 8px 14px;
+        font-size: 0.9em;
+    }
+
+    .section-header h2 {
+        font-size: 1.8em;
+    }
+
+    .calculator-form, 
+    .search-form, 
+    .diagnostico-avanzado-form {
+        max-width: 500px;
+        margin: 15px auto;
+    }
+
+    .sintomas-grid, 
+    .signos-alarma-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .protocolos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .numbers-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .quick-steps {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .emergencia-header {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .emergencia-icon {
+        font-size: 2.8em;
+        margin-right: 15px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .container {
+        width: 90%;
+    }
+
+    .header .container {
+        flex-direction: row;
+    }
+
+    .nav-btn {
+        padding: 9px 15px;
+        font-size: 0.95em;
+    }
+
+    .section-header h2 {
+        font-size: 2em;
+    }
+
+    .sintomas-grid, 
+    .signos-alarma-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .protocolos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .emergencias-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-steps {
+        justify-content: space-around;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .sintomas-grid, 
+    .signos-alarma-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .emergencias-container {
+        grid-template-columns: 1fr;
+    }
+
+    .emergencia-item {
+        max-width: none;
+    }
+
+    .quick-steps {
+        justify-content: space-around;
+    }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+    .nav-btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-protocolo,
+    .protocolo-card {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-group input[type="checkbox"] {
+        transform: scale(1.2);
+        margin-right: 10px;
+    }
+
+    .categoria-sintomas label,
+    .signos-categoria label {
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+    }
+}
