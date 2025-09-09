@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
+import { useHistory } from '../contexts/HistoryContext';
+import MedicationAlert from './MedicationAlert';
 import { 
   medicamentosDB, 
   obtenerMedicamento, 
@@ -6,7 +9,9 @@ import {
   validarDosis 
 } from '../data/medicamentos';
 
-const Calculadora = () => {
+const Calculadora = ({ initialSearch, setInitialSearch }) => {
+  const { colors } = useTheme();
+  const { addToHistory } = useHistory();
   const [peso, setPeso] = useState('');
   const [edad, setEdad] = useState('');
   const [medicamentoKey, setMedicamentoKey] = useState('');
@@ -14,6 +19,7 @@ const Calculadora = () => {
   const [resultado, setResultado] = useState(null);
   const [error, setError] = useState('');
   const [presentaciones, setPresentaciones] = useState([]);
+  const [busqueda, setBusqueda] = useState('');
 
   // Actualizar presentaciones cuando cambia el medicamento
   useEffect(() => {
@@ -35,6 +41,20 @@ const Calculadora = () => {
     setResultado(null);
     setError('');
   }, [medicamentoKey]);
+
+  // Manejar búsqueda inicial desde historial
+  useEffect(() => {
+    if (initialSearch) {
+      setBusqueda(initialSearch);
+      const medicamentoEncontrado = Object.keys(medicamentosDB).find(key => 
+        medicamentosDB[key].nombre.toLowerCase().includes(initialSearch.toLowerCase())
+      );
+      if (medicamentoEncontrado) {
+        setMedicamentoKey(medicamentoEncontrado);
+      }
+      setInitialSearch('');
+    }
+  }, [initialSearch, setInitialSearch]);
 
   const handleCalcular = () => {
     setError('');
@@ -98,6 +118,13 @@ const Calculadora = () => {
       resultado: resultadoCalculo,
       validacion,
       fecha: new Date()
+    });
+
+    // Agregar al historial
+    addToHistory({
+      type: 'medicamento',
+      name: med.nombre,
+      details: `${pesoNum}kg - ${resultadoCalculo.dosisMl}ml`
     });
   };
 
@@ -213,6 +240,14 @@ const Calculadora = () => {
             </ul>
           </div>
         )}
+        
+        {/* Alertas médicas avanzadas */}
+        {med.alertas && (
+          <MedicationAlert 
+            medicamento={med.nombre} 
+            alertas={med.alertas} 
+          />
+        )}
       </div>
     );
   };
@@ -252,6 +287,17 @@ const Calculadora = () => {
           </div>
 
           <div className="form-group">
+            <label htmlFor="busqueda">Buscar medicamento:</label>
+            <input 
+              type="text" 
+              id="busqueda"
+              placeholder="Escriba el nombre del medicamento..."
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
             <label htmlFor="medicamento">Medicamento:</label>
             <select 
               id="medicamento"
@@ -259,7 +305,11 @@ const Calculadora = () => {
               onChange={(e) => setMedicamentoKey(e.target.value)}
             >
               <option value="">Seleccionar medicamento...</option>
-              {Object.entries(medicamentosDB).map(([key, med]) => (
+              {Object.entries(medicamentosDB)
+                .filter(([key, med]) => 
+                  busqueda === '' || med.nombre.toLowerCase().includes(busqueda.toLowerCase())
+                )
+                .map(([key, med]) => (
                 <option key={key} value={key}>{med.nombre}</option>
               ))}
             </select>

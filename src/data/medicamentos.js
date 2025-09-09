@@ -7,6 +7,11 @@ export const medicamentosDB = {
         dosisDiaria: 60, // mg/kg/día máximo
         intervalo: 6, // horas
         maxDosis: 4, // dosis máximas por día
+        alertas: {
+            contraindicaciones: ["Insuficiencia hepática severa", "Hipersensibilidad al paracetamol"],
+            precauciones: ["Uso prolongado: vigilar función hepática", "No exceder dosis máxima diaria", "Revisar otros medicamentos que contengan paracetamol"],
+            alergias: ["Reacciones cutáneas raras pero graves: síndrome de Stevens-Johnson"]
+        },
         presentaciones: {
             "jarabe_120mg": {
                 nombre: "Jarabe 120mg/5ml (2.4%)",

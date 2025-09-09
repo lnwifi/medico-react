@@ -98,27 +98,7 @@ const InstallPWA = () => {
   };
 
   if (isInstalled) {
-    return (
-      <div style={{
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        background: '#4CAF50',
-        color: 'white',
-        padding: '15px',
-        borderRadius: '8px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-        zIndex: 1000,
-        maxWidth: '300px'
-      }}>
-        <div>
-          <strong>✅ App Instalada</strong>
-        </div>
-        <p style={{ margin: '10px 0 0', fontSize: '14px' }}>
-          PediaEmergencias está instalada y funciona offline
-        </p>
-      </div>
-    );
+    return null;
   }
 
   if (!isInstallable && !showManualInstructions) return null;

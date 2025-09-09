@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Header = ({ activeSection, setActiveSection }) => {
+  const { isDarkMode, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -55,6 +57,20 @@ const Header = ({ activeSection, setActiveSection }) => {
               onClick={() => handleNavClick('emergencias')}
             >
               Emergencias
+            </button>
+            <button 
+              className={`nav-btn ${activeSection === 'historial' ? 'active' : ''}`}
+              onClick={() => handleNavClick('historial')}
+            >
+              Historial
+            </button>
+            <button 
+              className="theme-toggle"
+              onClick={toggleTheme}
+              title={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+            >
+              <span>{isDarkMode ? '☀️' : '🌙'}</span>
+              <span>{isDarkMode ? 'Claro' : 'Oscuro'}</span>
             </button>
           </nav>
         </div>
