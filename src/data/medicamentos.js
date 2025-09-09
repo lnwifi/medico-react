@@ -624,6 +624,76 @@ export const medicamentosDB = {
         edadMinima: "1 año"
     },
 
+    cefalexina: {
+        nombre: "Cefalexina",
+        indicaciones: ["Infecciones del tracto respiratorio", "Infecciones de piel y tejidos blandos", "Infecciones del tracto urinario", "Otitis media"],
+        dosisKg: 50, // mg/kg/día (rango 25-100 mg/kg/día)
+        dosisDiaria: 100, // mg/kg/día máximo
+        intervalo: 6, // horas (4 dosis diarias)
+        maxDosis: 4, // dosis máximas por día
+        presentaciones: {
+            "suspension_125mg": {
+                nombre: "Suspensión 125mg/5ml",
+                concentracion: 25, // mg/ml
+                marcas: ["Cefalexina Normon", "Keflex", "Cefalexina Genérico"],
+                volumenFrasco: "60ml, 100ml, 150ml",
+                tipo: "liquido"
+            },
+            "suspension_250mg": {
+                nombre: "Suspensión 250mg/5ml",
+                concentracion: 50, // mg/ml
+                marcas: ["Cefalexina Forte", "Keflex Forte"],
+                volumenFrasco: "100ml, 150ml",
+                tipo: "liquido"
+            },
+            "capsulas_250mg": {
+                nombre: "Cápsulas 250mg",
+                concentracion: 250, // mg por unidad
+                marcas: ["Keflex", "Cefalexina Genérico"],
+                tipo: "solido"
+            },
+            "capsulas_500mg": {
+                nombre: "Cápsulas 500mg",
+                concentracion: 500, // mg por unidad
+                marcas: ["Keflex", "Cefalexina Normon"],
+                tipo: "solido"
+            },
+            "comprimidos_1g": {
+                nombre: "Comprimidos 1g",
+                concentracion: 1000, // mg por unidad
+                marcas: ["Cefalexina 1g"],
+                tipo: "solido"
+            }
+        },
+        alertas: {
+            contraindicaciones: [
+                "Hipersensibilidad a cefalosporinas",
+                "Alergia grave a penicilinas (reacción cruzada 1-10%)",
+                "Colitis pseudomembranosa previa por antibióticos"
+            ],
+            precauciones: [
+                "Usar con precaución en pacientes con alergia a penicilinas",
+                "Ajustar dosis en insuficiencia renal",
+                "Puede causar diarrea asociada a Clostridium difficile",
+                "Tomar con alimentos para reducir molestias gastrointestinales"
+            ],
+            alergias: [
+                "Reacciones de hipersensibilidad: urticaria, broncoespasmo",
+                "Reacciones cruzadas con penicilinas (1-10% de pacientes)",
+                "Reacciones anafilácticas raras pero posibles"
+            ]
+        },
+        contraindicaciones: ["Hipersensibilidad a cefalosporinas", "Alergia grave a penicilinas"],
+        advertencias: [
+            "Completar el curso completo de tratamiento (7-10 días)",
+            "Administrar con alimentos si causa molestias gástricas",
+            "Vigilar signos de diarrea severa o colitis",
+            "En caso de reacciones alérgicas, suspender inmediatamente"
+        ],
+        edadMinima: "1 mes",
+        duracion: "7-10 días"
+    },
+
     oxigeno: {
         nombre: "Oxígeno Medicinal",
         indicaciones: ["Hipoxemia", "Dificultad respiratoria", "Reanimación"],

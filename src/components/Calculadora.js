@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useTheme } from '../contexts/ThemeContext';
 import { useHistory } from '../contexts/HistoryContext';
 import MedicationAlert from './MedicationAlert';
 import { 

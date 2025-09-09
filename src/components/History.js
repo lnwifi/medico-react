@@ -28,6 +28,9 @@ const History = ({ setActiveSection, setInitialSearch }) => {
       } else if (item.type === 'emergencia') {
         setInitialSearch(item.name);
         setActiveSection('emergencias');
+      } else if (item.type === 'vacunacion') {
+        setInitialSearch(item.name);
+        setActiveSection('vacunacion');
       }
     }
   };
@@ -43,6 +46,7 @@ const History = ({ setActiveSection, setInitialSearch }) => {
       case 'diagnostico': return '🔍';
       case 'protocolo': return '📋';
       case 'emergencia': return '🚨';
+      case 'vacunacion': return '💉';
       default: return '📝';
     }
   };
@@ -53,6 +57,7 @@ const History = ({ setActiveSection, setInitialSearch }) => {
       case 'diagnostico': return 'Diagnóstico';
       case 'protocolo': return 'Protocolo';
       case 'emergencia': return 'Emergencia';
+      case 'vacunacion': return 'Vacunación';
       default: return 'Consulta';
     }
   };

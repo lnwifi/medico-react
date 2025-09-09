@@ -8,6 +8,7 @@ import Diagnosticos from './components/Diagnosticos';
 import DiagnosticoAvanzado from './components/DiagnosticoAvanzado';
 import Protocolos from './components/Protocolos';
 import Emergencias from './components/Emergencias';
+import VacunacionAvanzada from './components/VacunacionAvanzada';
 import History from './components/History';
 import Footer from './components/Footer';
 import InstallPWA from './components/InstallPWA';
@@ -28,6 +29,7 @@ function App() {
             {activeSection === 'diagnostico-avanzado' && <DiagnosticoAvanzado />}
             {activeSection === 'protocolos' && <Protocolos initialSearch={initialSearch} setInitialSearch={setInitialSearch} />}
             {activeSection === 'emergencias' && <Emergencias initialSearch={initialSearch} setInitialSearch={setInitialSearch} />}
+            {activeSection === 'vacunacion' && <VacunacionAvanzada initialSearch={initialSearch} setInitialSearch={setInitialSearch} />}
             {activeSection === 'historial' && <History setActiveSection={setActiveSection} setInitialSearch={setInitialSearch} />}
           </main>
           
