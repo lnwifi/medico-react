@@ -287,17 +287,6 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="busqueda">Buscar medicamento:</label>
-            <input 
-              type="text" 
-              id="busqueda"
-              placeholder="Escriba el nombre del medicamento..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
             <label htmlFor="medicamento">Medicamento:</label>
             <select 
               id="medicamento"
@@ -305,11 +294,7 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
               onChange={(e) => setMedicamentoKey(e.target.value)}
             >
               <option value="">Seleccionar medicamento...</option>
-              {Object.entries(medicamentosDB)
-                .filter(([key, med]) => 
-                  busqueda === '' || med.nombre.toLowerCase().includes(busqueda.toLowerCase())
-                )
-                .map(([key, med]) => (
+              {Object.entries(medicamentosDB).map(([key, med]) => (
                 <option key={key} value={key}>{med.nombre}</option>
               ))}
             </select>
