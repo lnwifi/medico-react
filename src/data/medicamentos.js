@@ -731,6 +731,68 @@ export const medicamentosDB = {
             }
         },
         advertencias: ["El oxígeno es un medicamento, administrar bajo indicación médica", "Peligro de incendio. No fumar ni exponer a fuentes de calor", "Humidificar el oxígeno en flujos >2 L/min o uso prolongado"]
+    },
+
+    lactulon: {
+        nombre: "Lactulosa (Lactulon)",
+        indicaciones: ["Estreñimiento", "Encefalopatía hepática", "Constipación crónica"],
+        dosisKg: 1, // ml/kg/día (rango 0.5-2 ml/kg/día)
+        dosisDiaria: 40, // ml/día máximo en niños
+        intervalo: 12, // horas (2 veces por día)
+        maxDosis: 2, // dosis máximas por día
+        alertas: {
+            contraindicaciones: [
+                "Obstrucción intestinal",
+                "Galactosemia",
+                "Hipersensibilidad a lactulosa"
+            ],
+            precauciones: [
+                "Ajustar dosis según respuesta intestinal",
+                "Puede causar distensión abdominal inicial",
+                "Mantener hidratación adecuada",
+                "En diabetes: vigilar niveles de glucosa"
+            ],
+            alergias: [
+                "Reacciones gastrointestinales: náuseas, vómitos",
+                "Hipersensibilidad rara: urticaria, broncoespasmo"
+            ]
+        },
+        presentaciones: {
+            "jarabe_667mg": {
+                nombre: "Jarabe 667mg/ml (66.7%)",
+                concentracion: 667, // mg/ml
+                marcas: ["Lactulon", "Duphalac", "Lactulosa Genérico"],
+                volumenFrasco: "200ml, 500ml",
+                tipo: "liquido"
+            },
+            "jarabe_3340mg": {
+                nombre: "Jarabe 3.34g/5ml",
+                concentracion: 668, // mg/ml (equivalente)
+                marcas: ["Lactulon Forte", "Duphalac Forte"],
+                volumenFrasco: "300ml",
+                tipo: "liquido"
+            },
+            "sobres_10g": {
+                nombre: "Sobres 10g/15ml",
+                concentracion: 667, // mg/ml una vez disuelto
+                marcas: ["Lactulon Sobres", "Duphalac Sobres"],
+                tipo: "liquido"
+            }
+        },
+        contraindicaciones: [
+            "Obstrucción intestinal o sospecha de la misma",
+            "Galactosemia hereditaria",
+            "Hipersensibilidad a lactulosa o galactosa"
+        ],
+        advertencias: [
+            "Iniciar con dosis baja y ajustar según respuesta",
+            "Puede causar flatulencia, distensión abdominal inicial",
+            "Efecto laxante se observa en 24-48 horas",
+            "En diabéticos: puede contener pequeñas cantidades de azúcares",
+            "Suspender si aparece dolor abdominal severo o diarrea intensa"
+        ],
+        edadMinima: "0 meses",
+        duracion: "Ajustar según respuesta, puede ser uso prolongado"
     }
 };
 
@@ -768,9 +830,14 @@ function calcularDosisMl(medicamento, peso, presentacion, indicacion = null) {
     }
 
     let dosisMg;
-    
-    // Calcular dosis en mg según el medicamento
-    if (medicamento === 'ibuprofeno' && indicacion) {
+    let volumenMl;
+
+    // Calcular dosis según el medicamento
+    if (medicamento === 'lactulon') {
+        // Para lactulon, la dosis se calcula directamente en ml/kg
+        volumenMl = peso * med.dosisKg; // ml/kg
+        dosisMg = null; // No aplica para lactulon
+    } else if (medicamento === 'ibuprofeno' && indicacion) {
         dosisMg = peso * med.dosisKg[indicacion];
     } else if (medicamento === 'prednisolona' && indicacion) {
         dosisMg = peso * med.dosisKg[indicacion];
@@ -818,8 +885,24 @@ function calcularDosisMl(medicamento, peso, presentacion, indicacion = null) {
         };
     }
 
+    // Para medicamentos líquidos regulares
+    if (medicamento === 'lactulon') {
+        // Para lactulon, el volumen ya está calculado directamente
+        return {
+            dosisMg: null, // No aplica para lactulon
+            volumenMl: Math.round(volumenMl * 100) / 100,
+            concentracion: pres.concentracion, // mg/ml (informativo)
+            intervalo: med.intervalo,
+            maxDosis: med.maxDosis || null,
+            presentacion: pres,
+            tipo: 'liquido_directo' // Identificador especial para lactulon
+        };
+    }
+
     const concentracion = pres.concentracion; // mg/ml
-    const volumenMl = dosisMg / concentracion;
+    if (!volumenMl) {
+        volumenMl = dosisMg / concentracion;
+    }
 
     return {
         dosisMg: Math.round(dosisMg * 10) / 10,

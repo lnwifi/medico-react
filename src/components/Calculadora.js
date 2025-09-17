@@ -118,10 +118,14 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
 
     // Agregar al historial con información completa
     const presentacionData = med.presentaciones?.[presentacionKey] || med.dispositivos?.[presentacionKey];
+    const dosisDetails = resultadoCalculo.tipo === 'liquido_directo' ?
+      `${pesoNum}kg - ${resultadoCalculo.volumenMl}ml` :
+      `${pesoNum}kg - ${resultadoCalculo.dosisMl || resultadoCalculo.volumenMl}ml`;
+
     addToHistory({
       type: 'medicamento',
       name: med.nombre,
-      details: `${pesoNum}kg - ${resultadoCalculo.dosisMl}ml`,
+      details: dosisDetails,
       fullData: {
         peso: pesoNum,
         edad: edad,
@@ -135,7 +139,8 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
           volumenMl: resultadoCalculo.volumenMl,
           concentracion: resultadoCalculo.concentracion,
           intervalo: resultadoCalculo.intervalo,
-          maxDosis: resultadoCalculo.maxDosis
+          maxDosis: resultadoCalculo.maxDosis,
+          tipo: resultadoCalculo.tipo
         },
         indicaciones: med.indicaciones,
         validacion: validacion,
@@ -197,7 +202,7 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
               <p><strong>Medicamento:</strong> {med.nombre}</p>
               <p><strong>Presentación:</strong> {med.presentaciones[presentacion].nombre}</p>
             </div>
-            
+
             <div className="dosis-info">
               <h4>💊 Dosis Calculada</h4>
               {res.tipo === 'aerosol' ? (
@@ -210,6 +215,12 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
                 <>
                   <p className="dosis-valor">Dosis: {res.dosisMg} mg = {res.unidades} {med.presentaciones[presentacion].nombre.split(' ')[0].toLowerCase()}(s)</p>
                   <p><strong>Concentración:</strong> {res.concentracion} mg/unidad</p>
+                </>
+              ) : res.tipo === 'liquido_directo' ? (
+                <>
+                  <p className="dosis-valor">Dosis: {res.volumenMl} ml</p>
+                  <p><strong>Cálculo:</strong> {(res.volumenMl / pesoRes).toFixed(1)} ml/kg</p>
+                  <p><strong>Presentación:</strong> {res.concentracion} mg/ml</p>
                 </>
               ) : (
                 <>
