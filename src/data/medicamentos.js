@@ -793,6 +793,150 @@ export const medicamentosDB = {
         ],
         edadMinima: "0 meses",
         duracion: "Ajustar según respuesta, puede ser uso prolongado"
+    },
+
+    metoclopramida: {
+        nombre: "Metoclopramida",
+        indicaciones: ["Náuseas y vómitos", "Gastroparesia", "Reflujo gastroesofágico", "Vómitos postoperatorios"],
+        dosisKg: 0.5, // mg/kg/dosis (rango 0.1-0.5)
+        dosisDiaria: 2, // mg/kg/día máximo
+        intervalo: 8, // horas
+        maxDosis: 3, // dosis máximas por día
+        alertas: {
+            contraindicaciones: [
+                "Obstrucción intestinal o perforación gastrointestinal",
+                "Feocromocitoma",
+                "Epilepsia no controlada",
+                "Hemorragia gastrointestinal",
+                "Hipersensibilidad a metoclopramida"
+            ],
+            precauciones: [
+                "Riesgo de efectos extrapiramidales, especialmente en niños",
+                "Usar por períodos cortos (máximo 5 días)",
+                "Vigilar aparición de discinesias tardías",
+                "Precaución en insuficiencia renal o hepática"
+            ],
+            alergias: [
+                "Reacciones extrapiramidales: distonía, discinesia, acatisia",
+                "Reacciones neurológicas: somnolencia, inquietud, depresión",
+                "Hiperprolactinemia: ginecomastia, galactorrea"
+            ]
+        },
+        presentaciones: {
+            "gotas_1mg_ml": {
+                nombre: "Gotas 1mg/ml",
+                concentracion: 1, // mg/ml
+                marcas: ["Reliveran Gotas", "Metoclopramida Genérico"],
+                volumenFrasco: "15ml, 20ml",
+                tipo: "liquido"
+            },
+            "gotas_4mg_ml": {
+                nombre: "Gotas 4mg/ml",
+                concentracion: 4, // mg/ml
+                marcas: ["Reliveran Forte"],
+                volumenFrasco: "10ml, 15ml",
+                tipo: "liquido"
+            },
+            "jarabe_1mg_ml": {
+                nombre: "Jarabe 1mg/ml",
+                concentracion: 1, // mg/ml
+                marcas: ["Metoclopramida Jarabe"],
+                volumenFrasco: "120ml",
+                tipo: "liquido"
+            },
+            "ampolla_5mg": {
+                nombre: "Ampolla 5mg/ml (10mg/2ml)",
+                concentracion: 5, // mg/ml
+                marcas: ["Reliveran Inyectable", "Metoclopramida IV"],
+                uso: "Uso hospitalario IV/IM",
+                tipo: "liquido"
+            },
+            "ampolla_10mg": {
+                nombre: "Ampolla 10mg/2ml (5mg/ml)",
+                concentracion: 5, // mg/ml
+                marcas: ["Primperan", "Metoclopramida Inyectable"],
+                uso: "Uso hospitalario IV/IM",
+                tipo: "liquido"
+            },
+            "comprimidos_10mg": {
+                nombre: "Comprimidos 10mg",
+                concentracion: 10, // mg por unidad
+                marcas: ["Primperan", "Reliveran"],
+                tipo: "solido"
+            }
+        },
+        contraindicaciones: [
+            "Obstrucción o perforación gastrointestinal",
+            "Epilepsia no controlada",
+            "Feocromocitoma",
+            "Hemorragia gastrointestinal",
+            "Hipersensibilidad a metoclopramida"
+        ],
+        advertencias: [
+            "Uso máximo de 5 días para evitar efectos extrapiramidales",
+            "Vigilar aparición de movimientos involuntarios o rigidez",
+            "Suspender inmediatamente si aparecen síntomas neurológicos",
+            "No usar de forma rutinaria en vómitos simples autolimitados",
+            "Riesgo aumentado de efectos adversos en menores de 1 año"
+        ],
+        edadMinima: "1 mes"
+    },
+
+    "sales-rehidratacion": {
+        nombre: "Sales de Rehidratación Oral (SRO)",
+        indicaciones: ["Deshidratación leve a moderada", "Diarrea aguda", "Vómitos", "Prevención de deshidratación"],
+        dosisFija: "Variable según peso y grado de deshidratación",
+        intervalo: "Continuo según tolerancia",
+        duracion: "Hasta corrección de la deshidratación",
+        presentaciones: {
+            "sobre_oms_reducido": {
+                nombre: "Sobres SRO Fórmula OMS (Osmolaridad Reducida)",
+                concentracion: null, // No aplica
+                marcas: ["Suero Casero Pharma", "SRO OMS", "Electrolit Pediátrico"],
+                composicion: "Na+ 75 mEq/L, Cl- 65 mEq/L, K+ 20 mEq/L, Glucosa 75 mmol/L",
+                preparacion: "1 sobre en 250ml de agua hervida fría",
+                tipo: "liquido"
+            },
+            "sobre_oms_original": {
+                nombre: "Sobres SRO Fórmula OMS Original",
+                concentracion: null, // No aplica
+                marcas: ["Suero Oral", "SRO Clásico"],
+                composicion: "Na+ 90 mEq/L, Cl- 80 mEq/L, K+ 20 mEq/L, Glucosa 111 mmol/L",
+                preparacion: "1 sobre en 1 litro de agua hervida fría",
+                tipo: "liquido"
+            },
+            "polvo_farmacia": {
+                nombre: "Polvo para SRO (Preparación Magistral)",
+                concentracion: null, // No aplica
+                marcas: ["Preparación Farmacia"],
+                composicion: "Según fórmula OMS",
+                preparacion: "Según indicación farmacéutica",
+                tipo: "liquido"
+            }
+        },
+        // Cálculos especiales para SRO
+        calculoEspecial: {
+            deficit_leve: "50 ml/kg en 4 horas", // 3-5% deshidratación
+            deficit_moderado: "100 ml/kg en 4 horas", // 6-9% deshidratación
+            mantenimiento: "100-150 ml/kg/día",
+            perdidas_continuas: "10-20 ml/kg por cada episodio de diarrea/vómito"
+        },
+        contraindicaciones: [
+            "Deshidratación severa (>10%) - requiere vía IV",
+            "Vómitos incoercibles que impiden la vía oral",
+            "Íleo paralítico u obstrucción intestinal",
+            "Shock hipovolémico",
+            "Alteración severa del estado de conciencia"
+        ],
+        advertencias: [
+            "Administrar en pequeños volúmenes frecuentes (5-10ml cada 2-3 min)",
+            "Si vomita, esperar 10 minutos y reiniciar más lentamente",
+            "Preparar fresco cada 24 horas y refrigerar",
+            "Usar agua hervida fría para la preparación",
+            "No agregar azúcar, miel ni otros endulzantes",
+            "Derivar si no mejora en 4-6 horas o empeora"
+        ],
+        edadMinima: "0 meses"
     }
 };
 
@@ -837,6 +981,16 @@ function calcularDosisMl(medicamento, peso, presentacion, indicacion = null) {
         // Para lactulon, la dosis se calcula directamente en ml/kg
         volumenMl = peso * med.dosisKg; // ml/kg
         dosisMg = null; // No aplica para lactulon
+    } else if (medicamento === 'sales-rehidratacion') {
+        // Para sales de rehidratación oral, retornar información especial
+        return {
+            tipo: 'sro',
+            peso: peso,
+            calculoEspecial: med.calculoEspecial,
+            presentacion: med.presentaciones[presentacion],
+            intervalo: med.intervalo,
+            duracion: med.duracion
+        };
     } else if (medicamento === 'ibuprofeno' && indicacion) {
         dosisMg = peso * med.dosisKg[indicacion];
     } else if (medicamento === 'prednisolona' && indicacion) {

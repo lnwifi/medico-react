@@ -175,6 +175,33 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
           </>
         )}
 
+        {/* HTML para Sales de Rehidratación Oral */}
+        {res.tipo === 'sro' && (
+          <>
+            <div className="dosis-info">
+              <h4>📋 Datos del Paciente</h4>
+              <p><strong>Peso:</strong> {res.peso} kg</p>
+              {edadRes && <p><strong>Edad:</strong> {edadRes}</p>}
+              <p><strong>Medicamento:</strong> {med.nombre}</p>
+              <p><strong>Presentación:</strong> {res.presentacion.nombre}</p>
+            </div>
+            <div className="dosis-info">
+              <h4>💧 Cálculos de Rehidratación</h4>
+              <p className="dosis-valor">Déficit Leve (3-5%): {res.calculoEspecial.deficit_leve}</p>
+              <p className="dosis-valor">Déficit Moderado (6-9%): {res.calculoEspecial.deficit_moderado}</p>
+              <p className="dosis-valor">Mantenimiento: {res.calculoEspecial.mantenimiento}</p>
+              <p className="dosis-valor">Pérdidas continuas: {res.calculoEspecial.perdidas_continuas}</p>
+            </div>
+            <div className="dosis-info">
+              <h4>🧪 Composición y Preparación</h4>
+              <p><strong>Composición:</strong> {res.presentacion.composicion}</p>
+              <p><strong>Preparación:</strong> {res.presentacion.preparacion}</p>
+              <p><strong>Administración:</strong> {res.intervalo}</p>
+              {res.duracion && <p><strong>Duración:</strong> {res.duracion}</p>}
+            </div>
+          </>
+        )}
+
         {/* HTML para Dosis Fija */}
         {res.dosisFija && (
           <>
@@ -193,7 +220,7 @@ const Calculadora = ({ initialSearch, setInitialSearch }) => {
         )}
 
         {/* HTML para Dosis Calculada */}
-        {!res.dosisFija && res.tipo !== 'gas' && (
+        {!res.dosisFija && res.tipo !== 'gas' && res.tipo !== 'sro' && (
           <>
             <div className="dosis-info">
               <h4>📊 Datos del Paciente</h4>
