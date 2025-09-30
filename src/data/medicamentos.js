@@ -882,6 +882,112 @@ export const medicamentosDB = {
         edadMinima: "1 mes"
     },
 
+    ketorolac: {
+        nombre: "Ketorolac",
+        indicaciones: ["Dolor moderado a severo", "Dolor postoperatorio", "Cólico renal", "Dolor traumático agudo"],
+        dosisKg: {
+            oral: 0.5, // mg/kg/dosis (rango 0.25-1 mg/kg)
+            im_iv: 0.5 // mg/kg/dosis (rango 0.5 mg/kg, máximo 30mg/dosis)
+        },
+        dosisDiaria: 2, // mg/kg/día máximo
+        intervalo: 6, // horas (cada 6-8 horas)
+        maxDosis: 4, // dosis máximas por día
+        dosisMaximaDiaria: {
+            oral: 40, // mg/día en niños
+            im_iv: 120 // mg/día en adultos (60mg/día en niños)
+        },
+        duracion: "Máximo 5 días",
+        alertas: {
+            contraindicaciones: [
+                "Alergia a AINEs o aspirina",
+                "Úlcera péptica activa o hemorragia gastrointestinal",
+                "Insuficiencia renal severa",
+                "Hemorragia cerebrovascular reciente",
+                "Alto riesgo de sangrado o cirugía mayor reciente",
+                "Menores de 2 años",
+                "Deshidratación severa",
+                "Embarazo (tercer trimestre) y lactancia"
+            ],
+            precauciones: [
+                "NO usar por más de 5 días (riesgo de sangrado GI y renal)",
+                "Vigilar función renal especialmente en deshidratación",
+                "No combinar con otros AINEs o anticoagulantes",
+                "Aumenta riesgo de sangrado postoperatorio",
+                "Usar dosis mínima efectiva por el menor tiempo posible",
+                "Precaución en pacientes con asma (broncoespasmo)",
+                "Puede enmascarar signos de infección"
+            ],
+            alergias: [
+                "Reacciones de hipersensibilidad: urticaria, angioedema, broncoespasmo",
+                "Reacción cruzada con otros AINEs y aspirina",
+                "Síndrome de Stevens-Johnson (raro pero grave)"
+            ]
+        },
+        presentaciones: {
+            "comprimidos_10mg": {
+                nombre: "Comprimidos 10mg",
+                concentracion: 10, // mg por unidad
+                marcas: ["Toradol", "Dolac", "Ketorolac Genérico"],
+                tipo: "solido"
+            },
+            "comprimidos_sublingual_10mg": {
+                nombre: "Comprimidos Sublinguales 10mg",
+                concentracion: 10, // mg por unidad
+                marcas: ["Toradol Sublingual", "Dolac SL"],
+                tipo: "solido",
+                uso: "Vía sublingual (absorción más rápida)"
+            },
+            "ampolla_30mg": {
+                nombre: "Ampolla 30mg/ml (1ml)",
+                concentracion: 30, // mg/ml
+                marcas: ["Toradol Inyectable", "Dolac Inyectable", "Ketorolac IM/IV"],
+                uso: "Uso hospitalario IM/IV",
+                tipo: "liquido"
+            },
+            "ampolla_60mg": {
+                nombre: "Ampolla 60mg/2ml (30mg/ml)",
+                concentracion: 30, // mg/ml
+                marcas: ["Toradol 60mg", "Ketorolac 60mg"],
+                uso: "Uso hospitalario IM/IV",
+                tipo: "liquido"
+            },
+            "gotas_oftalmicas": {
+                nombre: "Gotas Oftálmicas 0.5% (5mg/ml)",
+                concentracion: 5, // mg/ml
+                marcas: ["Acular", "Ketorolac Oftálmico"],
+                uso: "Uso oftálmico exclusivamente (no sistémico)",
+                tipo: "liquido",
+                nota: "No usar para dolor sistémico, solo ocular"
+            }
+        },
+        contraindicaciones: [
+            "Menores de 2 años",
+            "Alergia a AINEs o aspirina",
+            "Úlcera péptica activa o hemorragia gastrointestinal",
+            "Insuficiencia renal severa (Cr >4mg/dL)",
+            "Hemorragia cerebrovascular reciente",
+            "Alto riesgo de sangrado",
+            "Cirugía mayor en las últimas 24-48 horas",
+            "Deshidratación severa",
+            "Asma severa inducida por AINEs",
+            "Embarazo (tercer trimestre)",
+            "Lactancia materna"
+        ],
+        advertencias: [
+            "⚠️ NO usar por más de 5 días consecutivos",
+            "🚨 Alto riesgo de sangrado gastrointestinal y renal",
+            "💊 NO es analgésico de primera línea en pediatría",
+            "🏥 Uso preferentemente hospitalario o bajo supervisión médica estrecha",
+            "🩸 Puede aumentar riesgo de sangrado postoperatorio",
+            "💧 Asegurar hidratación adecuada antes de administrar",
+            "⛔ NO combinar con otros AINEs, aspirina o anticoagulantes",
+            "👁️ Vigilar signos de sangrado: melena, hematuria, equimosis",
+            "🧪 Monitorear función renal en tratamientos >48 horas",
+            "No administrar en periodo perioperatorio de cirugía cardiovascular"
+        ],
+        edadMinima: "2 años"
+    },
+
     "sales-rehidratacion": {
         nombre: "Sales de Rehidratación Oral (SRO)",
         indicaciones: ["Deshidratación leve a moderada", "Diarrea aguda", "Vómitos", "Prevención de deshidratación"],
@@ -914,7 +1020,140 @@ export const medicamentosDB = {
                 tipo: "liquido"
             }
         },
-        // Cálculos especiales para SRO
+        // Esquemas de tratamiento según grado de deshidratación
+        esquemasTratamiento: {
+            sin_deshidratacion: {
+                nombre: "Plan A - Sin Deshidratación (Prevención)",
+                signos: [
+                    "Estado general: Alerta, activo",
+                    "Ojos: Normales",
+                    "Lágrimas: Presentes",
+                    "Mucosas: Húmedas",
+                    "Sed: Normal",
+                    "Signo del pliegue: Se retrae inmediatamente"
+                ],
+                volumen: "10 ml/kg por cada deposición líquida",
+                volumenAdicional: "2 ml/kg por cada vómito",
+                duracion: "Continuar hasta que cese la diarrea",
+                via: "Oral en el hogar",
+                administracion: "Dar pequeños sorbos frecuentes",
+                instrucciones: [
+                    "Continuar alimentación normal (lactancia materna, alimentación habitual)",
+                    "Ofrecer SRO después de cada deposición líquida",
+                    "Dar pequeños sorbos frecuentes con cucharita o jeringa",
+                    "Enseñar a la madre signos de alarma para consultar"
+                ],
+                signosAlarma: [
+                    "No puede beber o amamantarse",
+                    "Vomita todo lo que ingiere",
+                    "Presenta convulsiones",
+                    "Está letárgico o inconsciente",
+                    "Sangre en las heces",
+                    "Empeora o no mejora en 48 horas"
+                ]
+            },
+            leve: {
+                nombre: "Plan B - Deshidratación Leve (3-5%)",
+                signos: [
+                    "Estado general: Inquieto, irritable",
+                    "Ojos: Ligeramente hundidos",
+                    "Lágrimas: Escasas",
+                    "Mucosas: Secas",
+                    "Sed: Sediento, bebe con avidez",
+                    "Signo del pliegue: Se retrae lentamente (<2 seg)"
+                ],
+                volumen: "50-100 ml/kg en 4 horas",
+                duracion: "4 horas",
+                via: "Oral en servicio de salud u hogar supervisado",
+                administracion: "5-10 ml cada 2-3 minutos con cucharita, jeringa o vaso",
+                instrucciones: [
+                    "Administrar 50-100 ml/kg en las primeras 4 horas",
+                    "Ofrecer líquidos frecuentemente en pequeños volúmenes",
+                    "Si vomita, esperar 10 minutos y reiniciar más lentamente",
+                    "Reevaluar cada hora: si mejora continuar, si empeora o no mejora → IV",
+                    "Tras 4 horas: reevaluar estado de hidratación",
+                    "Si está hidratado: pasar a Plan A",
+                    "Si persiste deshidratación: repetir Plan B o valorar vía IV"
+                ],
+                perdidasContinuas: "10-20 ml/kg por cada deposición líquida adicional durante el tratamiento",
+                alimentacion: "Mantener lactancia materna. Otras alimentaciones suspender durante 4h, luego reiniciar"
+            },
+            moderada: {
+                nombre: "Plan B - Deshidratación Moderada (6-9%)",
+                signos: [
+                    "Estado general: Inquieto, irritable marcado",
+                    "Ojos: Hundidos",
+                    "Lágrimas: Ausentes",
+                    "Mucosas: Muy secas",
+                    "Sed: Muy sediento, bebe ávidamente",
+                    "Signo del pliegue: Se retrae lentamente (2 seg)",
+                    "Fontanela: Hundida (en lactantes)"
+                ],
+                volumen: "100 ml/kg en 4 horas",
+                duracion: "4 horas",
+                via: "Oral en servicio de salud, considerar sonda nasogástrica si no tolera VO",
+                administracion: "5-10 ml cada 2-3 minutos. Si no tolera VO: sonda nasogástrica 20-30ml/kg/hora",
+                instrucciones: [
+                    "Administrar 100 ml/kg en las primeras 4 horas",
+                    "Monitoreo estrecho en servicio de salud",
+                    "Si no tolera vía oral → considerar sonda nasogástrica (20-30ml/kg/hora)",
+                    "Si vomita persistentemente → vía IV",
+                    "Reevaluar cada hora",
+                    "Si mejora y tolera VO: continuar Plan B",
+                    "Si no mejora o empeora: hidratación IV (Plan C)",
+                    "Una vez rehidratado: pasar a Plan A"
+                ],
+                perdidasContinuas: "20 ml/kg por cada deposición líquida adicional durante el tratamiento",
+                alimentacion: "Mantener lactancia materna. Suspender otras alimentaciones durante tratamiento",
+                criteriosDerivacion: [
+                    "Vómitos persistentes que impiden rehidratación oral",
+                    "Distensión abdominal severa",
+                    "No mejora tras 4 horas de rehidratación oral",
+                    "Aparición de signos de deshidratación grave"
+                ]
+            },
+            severa: {
+                nombre: "Plan C - Deshidratación Severa (≥10%)",
+                signos: [
+                    "Estado general: Letárgico, inconsciente, hipotónico",
+                    "Ojos: Muy hundidos",
+                    "Lágrimas: Ausentes",
+                    "Mucosas: Muy secas",
+                    "Sed: No puede beber o bebe muy mal",
+                    "Signo del pliegue: Se retrae muy lentamente (>2 seg)",
+                    "Pulso: Débil o ausente",
+                    "Llenado capilar: >3 segundos",
+                    "Fontanela: Muy hundida (en lactantes)"
+                ],
+                volumen: "HIDRATACIÓN INTRAVENOSA INMEDIATA",
+                duracion: "Según evolución",
+                via: "Vía intravenosa (Ringer Lactato o Solución Fisiológica 0.9%)",
+                administracion: "EMERGENCIA - Derivación inmediata",
+                instrucciones: [
+                    "🚨 EMERGENCIA - Derivación INMEDIATA a hospital",
+                    "Iniciar vía IV con Ringer Lactato o SF 0.9%",
+                    "Menores de 12 meses: 30 ml/kg en 1 hora*, luego 70 ml/kg en 5 horas",
+                    "Mayores de 12 meses: 30 ml/kg en 30 min*, luego 70 ml/kg en 2.5 horas",
+                    "(*) Repetir si pulso radial sigue débil o no palpable",
+                    "Reevaluar cada 15-30 minutos",
+                    "Una vez pueda beber: agregar SRO (5ml/kg/h) mientras continúa IV",
+                    "Cuando esté hidratado y tolere VO: continuar con Plan A"
+                ],
+                tratamientoInicial: {
+                    lactantes: "100 ml/kg: 30ml/kg en 1h + 70ml/kg en 5h",
+                    ninos: "100 ml/kg: 30ml/kg en 30min + 70ml/kg en 2.5h"
+                },
+                signosAlarma: [
+                    "Shock hipovolémico",
+                    "Alteración del estado de conciencia",
+                    "Convulsiones",
+                    "Íleo paralítico",
+                    "Insuficiencia renal aguda"
+                ],
+                noIndicadoSRO: "La deshidratación severa requiere tratamiento IV. NO intentar rehidratación oral hasta estabilización."
+            }
+        },
+        // Cálculos especiales para SRO (mantener para compatibilidad)
         calculoEspecial: {
             deficit_leve: "50 ml/kg en 4 horas", // 3-5% deshidratación
             deficit_moderado: "100 ml/kg en 4 horas", // 6-9% deshidratación
@@ -922,7 +1161,7 @@ export const medicamentosDB = {
             perdidas_continuas: "10-20 ml/kg por cada episodio de diarrea/vómito"
         },
         contraindicaciones: [
-            "Deshidratación severa (>10%) - requiere vía IV",
+            "Deshidratación severa (≥10%) - requiere vía IV",
             "Vómitos incoercibles que impiden la vía oral",
             "Íleo paralítico u obstrucción intestinal",
             "Shock hipovolémico",
@@ -987,6 +1226,7 @@ function calcularDosisMl(medicamento, peso, presentacion, indicacion = null) {
             tipo: 'sro',
             peso: peso,
             calculoEspecial: med.calculoEspecial,
+            esquemasTratamiento: med.esquemasTratamiento,
             presentacion: med.presentaciones[presentacion],
             intervalo: med.intervalo,
             duracion: med.duracion
@@ -997,6 +1237,16 @@ function calcularDosisMl(medicamento, peso, presentacion, indicacion = null) {
         dosisMg = peso * med.dosisKg[indicacion];
     } else if (medicamento === 'fenitoina' && indicacion) {
         dosisMg = peso * med.dosisKg[indicacion];
+    } else if (medicamento === 'ketorolac') {
+        // Ketorolac: determinar vía según presentación
+        const pres = med.presentaciones[presentacion];
+        if (pres.uso && pres.uso.includes('IM/IV')) {
+            dosisMg = peso * med.dosisKg.im_iv;
+            // Dosis máxima de 30mg por dosis
+            if (dosisMg > 30) dosisMg = 30;
+        } else {
+            dosisMg = peso * med.dosisKg.oral;
+        }
     } else if (typeof med.dosisKg === 'object') {
         // Default a la primera dosis si no hay indicación específica
         dosisMg = peso * med.dosisKg[Object.keys(med.dosisKg)[0]];
@@ -1093,6 +1343,7 @@ function validarDosis(medicamento, peso, edad = null) {
 
     const errores = [];
     const advertencias = [];
+    const contraindicacionesActivas = [];
 
     // No validar peso para oxígeno o medicamentos de dosis fija
     if (med.tipo !== 'gas' && !med.dosisFija) {
@@ -1101,49 +1352,147 @@ function validarDosis(medicamento, peso, edad = null) {
         }
     }
 
-    // Validar edad mínima
-    if (edad && med.edadMinima) {
+    // Validar edad mínima - VALIDACIÓN ESTRICTA
+    if (edad) {
         const edadMeses = convertirEdadAMeses(edad);
-        const edadMinimaMeses = convertirEdadAMeses(med.edadMinima);
-        
-        if (edadMeses < edadMinimaMeses) {
-            errores.push(`No recomendado en menores de ${med.edadMinima}`);
+
+        if (edadMeses !== null && med.edadMinima) {
+            const edadMinimaMeses = convertirEdadAMeses(med.edadMinima);
+
+            if (edadMeses < edadMinimaMeses) {
+                errores.push(`⛔ CONTRAINDICADO: Este medicamento NO está indicado en menores de ${med.edadMinima}`);
+                contraindicacionesActivas.push(`Edad insuficiente (requiere ≥${med.edadMinima})`);
+            }
+        }
+
+        // Validaciones específicas por medicamento basadas en edad
+        if (medicamento === 'ibuprofeno' && edadMeses !== null && edadMeses < 3) {
+            errores.push("⛔ CONTRAINDICADO: Ibuprofeno NO está indicado en menores de 3 meses");
+            contraindicacionesActivas.push("Edad menor a 3 meses");
+        }
+
+        if (medicamento === 'difenhidramina' && edadMeses !== null && edadMeses < 24) {
+            errores.push("⛔ CONTRAINDICADO: Difenhidramina NO está indicada en menores de 2 años (riesgo de depresión respiratoria)");
+            contraindicacionesActivas.push("Edad menor a 2 años - Alto riesgo");
+        }
+
+        if (medicamento === 'dipirona' && edadMeses !== null && edadMeses < 3) {
+            errores.push("⛔ CONTRAINDICADO: Dipirona NO está indicada en menores de 3 meses");
+            contraindicacionesActivas.push("Edad menor a 3 meses");
+        }
+
+        if (medicamento === 'diazepam' && edadMeses !== null && edadMeses < 6) {
+            errores.push("⛔ CONTRAINDICADO: Diazepam NO está indicado en menores de 6 meses");
+            contraindicacionesActivas.push("Edad menor a 6 meses");
+        }
+
+        if (medicamento === 'ciriax-otic-l' && edadMeses !== null && edadMeses < 12) {
+            errores.push("⛔ CONTRAINDICADO: Ciriax Otic L NO está indicado en menores de 1 año");
+            contraindicacionesActivas.push("Edad menor a 1 año");
+        }
+
+        if (medicamento === 'cefalexina' && edadMeses !== null && edadMeses < 1) {
+            errores.push("⛔ CONTRAINDICADO: Cefalexina NO está indicada en menores de 1 mes");
+            contraindicacionesActivas.push("Edad menor a 1 mes");
+        }
+
+        if (medicamento === 'metoclopramida' && edadMeses !== null && edadMeses < 1) {
+            errores.push("⚠️ USO CON PRECAUCIÓN: Metoclopramida en menores de 1 mes tiene riesgo aumentado de efectos extrapiramidales");
+            advertencias.push("Riesgo aumentado de efectos adversos neurológicos en lactantes muy pequeños");
+        }
+
+        if (medicamento === 'ketorolac' && edadMeses !== null && edadMeses < 24) {
+            errores.push("⛔ CONTRAINDICADO: Ketorolac NO está indicado en menores de 2 años");
+            contraindicacionesActivas.push("Edad menor a 2 años - Alto riesgo de sangrado y daño renal");
         }
     }
 
-    // Validaciones específicas por medicamento
-    if (medicamento === 'ibuprofeno') {
-        if (peso < 5) { // Aproximadamente 3 meses
-            errores.push("Ibuprofeno no recomendado en menores de 3 meses");
+    // Validaciones por peso (algunas drogas tienen límites específicos)
+    if (medicamento === 'ibuprofeno' && peso < 5) {
+        if (!edad || convertirEdadAMeses(edad) === null) {
+            advertencias.push("⚠️ PRECAUCIÓN: Peso bajo (<5kg). Verificar edad para confirmar que es ≥3 meses");
         }
     }
 
+    if (medicamento === 'dipirona' && peso < 5) {
+        errores.push("⛔ CONTRAINDICADO: Dipirona NO está indicada en pacientes <5kg");
+        contraindicacionesActivas.push("Peso menor a 5kg");
+    }
+
+    // Advertencias específicas importantes
     if (medicamento === 'diazepam') {
-        advertencias.push("SOLO para convulsiones >5 minutos");
-        advertencias.push("Derivar inmediatamente al hospital");
+        advertencias.push("🚨 SOLO para convulsiones >5 minutos o según indicación médica específica");
+        advertencias.push("🏥 Derivar inmediatamente al hospital tras administración");
     }
-    
+
     if (medicamento === 'fenitoina') {
-        advertencias.push("Uso exclusivo hospitalario. Requiere monitorización.");
+        advertencias.push("🏥 Uso EXCLUSIVO hospitalario. Requiere monitorización cardíaca y de niveles plasmáticos");
     }
+
+    if (medicamento === 'dipirona') {
+        advertencias.push("⚠️ NO es antipirético de primera línea. Reservar para fiebre refractaria");
+        advertencias.push("🚨 Alto riesgo de agranulocitosis y shock anafiláctico");
+    }
+
+    if (medicamento === 'ketorolac') {
+        advertencias.push("🚨 NO usar por más de 5 días - Alto riesgo de sangrado GI y daño renal");
+        advertencias.push("🏥 Uso preferentemente hospitalario o bajo supervisión médica estrecha");
+        advertencias.push("💊 NO es analgésico de primera línea en pediatría");
+        advertencias.push("💧 Asegurar hidratación adecuada antes de administrar");
+    }
+
+    // Mostrar contraindicaciones generales del medicamento
+    const contraindicacionesGenerales = med.contraindicaciones || [];
 
     return {
         valida: errores.length === 0,
         errores: errores,
-        advertencias: advertencias.concat(med.advertencias || [])
+        advertencias: advertencias.concat(med.advertencias || []),
+        contraindicacionesActivas: contraindicacionesActivas,
+        contraindicacionesGenerales: contraindicacionesGenerales
     };
 }
 
 function convertirEdadAMeses(edad) {
+    if (!edad) return null;
+
     if (typeof edad === 'string') {
-        // Convertir string de edad a meses
-        if (edad.includes('año')) {
-            return parseInt(edad) * 12;
-        } else if (edad.includes('mes')) {
-            return parseInt(edad);
+        const edadLower = edad.toLowerCase().trim();
+
+        // Manejar formato "X años Y meses"
+        const matchAniosMeses = edadLower.match(/(\d+)\s*año[s]?\s*(?:y\s*)?(\d+)?\s*mes(?:es)?/);
+        if (matchAniosMeses) {
+            const anios = parseInt(matchAniosMeses[1]) || 0;
+            const meses = parseInt(matchAniosMeses[2]) || 0;
+            return (anios * 12) + meses;
+        }
+
+        // Manejar solo años
+        const matchAnios = edadLower.match(/(\d+)\s*año[s]?/);
+        if (matchAnios) {
+            return parseInt(matchAnios[1]) * 12;
+        }
+
+        // Manejar solo meses
+        const matchMeses = edadLower.match(/(\d+)\s*mes(?:es)?/);
+        if (matchMeses) {
+            return parseInt(matchMeses[1]);
+        }
+
+        // Manejar días (convertir a fracción de mes)
+        const matchDias = edadLower.match(/(\d+)\s*d[ií]a[s]?/);
+        if (matchDias) {
+            return Math.ceil(parseInt(matchDias[1]) / 30);
+        }
+
+        // Manejar semanas
+        const matchSemanas = edadLower.match(/(\d+)\s*semana[s]?/);
+        if (matchSemanas) {
+            return Math.ceil(parseInt(matchSemanas[1]) / 4);
         }
     }
-    return 0;
+
+    return null;
 }
 
 function obtenerCategoriaEdad(peso) {

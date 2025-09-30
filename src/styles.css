@@ -195,6 +195,49 @@ body {
     font-size: 1em;
 }
 
+/* Estilos para campos de edad */
+.edad-inputs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.edad-input-wrapper {
+    display: flex;
+    flexDirection: column;
+    gap: 5px;
+}
+
+.edad-label {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.edad-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.edad-info-message {
+    display: block;
+    margin-top: 10px;
+}
+
 .btn-primary {
     background-color: #4CAF50;
     color: white;
@@ -1704,5 +1747,105 @@ h1, h2, h3, h4, h5, h6 {
         padding: 8px 0;
         display: flex;
         align-items: center;
+    }
+
+    /* Responsive para campos de edad - Móviles */
+    .edad-inputs-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .edad-input-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .edad-input {
+        font-size: 1.2em !important;
+        padding: 15px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .edad-label {
+        font-size: 0.95em !important;
+    }
+}
+
+/* Media query para tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    .edad-inputs-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .edad-input-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .edad-input {
+        padding: 10px !important;
+        font-size: 1em !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Estilos adicionales para campos de edad en desktop */
+@media (min-width: 769px) {
+    .edad-inputs-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 15px !important;
+    }
+
+    .edad-input-wrapper {
+        width: 100% !important;
+    }
+
+    .edad-input {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Mejoras responsive adicionales para móviles */
+@media (max-width: 480px) {
+    .calculator-form {
+        padding: 15px !important;
+    }
+
+    .form-group label {
+        font-size: 0.95em;
+    }
+
+    .edad-info-message {
+        font-size: 0.8em !important;
+        padding: 10px !important;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 15px !important;
+        font-size: 1.1em !important;
+    }
+
+    .resultado-card {
+        padding: 15px !important;
+    }
+
+    .dosis-info h4 {
+        font-size: 1.1em !important;
+    }
+
+    .dosis-valor {
+        font-size: 1em !important;
+    }
+
+    /* Ajustes para inputs en móviles */
+    input[type="number"],
+    input[type="text"],
+    select {
+        font-size: 16px !important; /* Evita zoom en iOS */
     }
 }
