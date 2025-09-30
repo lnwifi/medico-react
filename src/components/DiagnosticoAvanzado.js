@@ -64,48 +64,261 @@ const DiagnosticoAvanzado = () => {
     setCurrentStep(prev => prev - 1);
   };
 
+  // Base de datos de patrones clínicos pediátricos
+  const patronesClinicos = {
+    // RESPIRATORIAS
+    neumonia_grave: {
+      nombre: 'Neumonía Grave',
+      sintomasRequeridos: ['fiebre', 'tos', 'dificultad respiratoria'],
+      sintomasOpcionales: ['decaimiento', 'inapetencia'],
+      signosAlarma: ['tiraje', 'cianosis', 'quejido respiratorio', 'taquipnea severa'],
+      puntoBase: 85,
+      tratamiento: ['🚨 REFERIR URGENTEMENTE', 'Oxígeno suplementario si disponible', 'Antibióticoterapia IV (ampicilina + gentamicina)', 'Monitoreo continuo de signos vitales', 'Evaluación inmediata por pediatra'],
+      urgencia: 'critica'
+    },
+    neumonia: {
+      nombre: 'Neumonía',
+      sintomasRequeridos: ['fiebre', 'tos'],
+      sintomasOpcionales: ['dificultad respiratoria', 'decaimiento', 'inapetencia'],
+      signosAlarma: ['taquipnea severa'],
+      puntoBase: 75,
+      tratamiento: ['Antibióticoterapia oral (amoxicilina 80-90 mg/kg/día)', 'Antitérmicos (paracetamol o ibuprofeno)', 'Hidratación adecuada', 'Control en 48 horas', 'Signos de alarma a padres'],
+      urgencia: 'alta'
+    },
+    bronquiolitis: {
+      nombre: 'Bronquiolitis',
+      sintomasRequeridos: ['tos', 'dificultad respiratoria'],
+      sintomasOpcionales: ['fiebre', 'sibilancias', 'rinorrea', 'inapetencia'],
+      signosAlarma: ['tiraje', 'quejido respiratorio', 'apneas'],
+      edadMax: 24, // meses
+      puntoBase: 70,
+      tratamiento: ['Medidas de soporte', 'Hidratación frecuente', 'Lavados nasales con suero fisiológico', 'Posición semisentada', 'Control diario si es leve', 'Hospitalización si dificultad respiratoria moderada-severa'],
+      urgencia: 'moderada'
+    },
+    asma_agudizado: {
+      nombre: 'Crisis Asmática / Asma Agudizado',
+      sintomasRequeridos: ['dificultad respiratoria', 'sibilancias'],
+      sintomasOpcionales: ['tos', 'tiraje'],
+      signosAlarma: ['tiraje', 'cianosis', 'taquipnea severa'],
+      puntoBase: 70,
+      tratamiento: ['Salbutamol inhalado (2-4 puffs cada 20 min x 3 dosis)', 'Corticoide oral (prednisolona 1-2 mg/kg)', 'Oxígeno si saturación <92%', 'Reevaluación frecuente', 'Si no mejora: referir a urgencias'],
+      urgencia: 'alta'
+    },
+    laringitis: {
+      nombre: 'Laringitis / Crup',
+      sintomasRequeridos: ['tos', 'ronquera'],
+      sintomasOpcionales: ['estridor', 'dificultad respiratoria', 'fiebre'],
+      signosAlarma: ['estridor', 'tiraje', 'cianosis'],
+      puntoBase: 65,
+      tratamiento: ['Dexametasona oral 0.6 mg/kg dosis única', 'Ambiente húmedo', 'Hidratación', 'Observación por 2-3 horas', 'Si estridor en reposo: referir'],
+      urgencia: 'moderada'
+    },
+    ira_alta: {
+      nombre: 'Infección Respiratoria Aguda Alta (Resfriado)',
+      sintomasRequeridos: ['rinorrea'],
+      sintomasOpcionales: ['tos', 'fiebre', 'dolor garganta', 'decaimiento'],
+      signosAlarma: [],
+      puntoBase: 60,
+      tratamiento: ['Tratamiento sintomático', 'Lavados nasales frecuentes', 'Antitérmicos si fiebre', 'Hidratación adecuada', 'Control si empeora o persiste >5 días'],
+      urgencia: 'leve'
+    },
+    faringitis: {
+      nombre: 'Faringitis Aguda',
+      sintomasRequeridos: ['dolor garganta'],
+      sintomasOpcionales: ['fiebre', 'decaimiento', 'inapetencia'],
+      signosAlarma: [],
+      puntoBase: 55,
+      tratamiento: ['Analgésicos/antitérmicos', 'Hidratación', 'Alimentos blandos', 'Si >3 años considerar test rápido estreptococo', 'Antibiótico solo si estreptococo confirmado'],
+      urgencia: 'leve'
+    },
+
+    // DIGESTIVAS
+    gastroenteritis_deshidratacion: {
+      nombre: 'Gastroenteritis Aguda con Deshidratación',
+      sintomasRequeridos: ['vómitos', 'diarrea'],
+      sintomasOpcionales: ['fiebre', 'dolor abdominal', 'náuseas', 'decaimiento'],
+      signosAlarma: ['palidez extrema', 'letargo'],
+      signosEspecificos: ['mucosas secas', 'ojos hundidos'], // Añadiremos estos
+      puntoBase: 80,
+      tratamiento: ['Sales de rehidratación oral', 'Plan B: 75 ml/kg en 4 horas', 'Reevaluación continua', 'Zinc 10-20 mg/día por 10 días', 'Si vómitos persistentes o deshidratación severa: referir'],
+      urgencia: 'alta'
+    },
+    gastroenteritis: {
+      nombre: 'Gastroenteritis Aguda',
+      sintomasRequeridos: ['diarrea'],
+      sintomasOpcionales: ['vómitos', 'fiebre', 'dolor abdominal', 'náuseas'],
+      signosAlarma: [],
+      puntoBase: 65,
+      tratamiento: ['Sales de rehidratación oral', 'Plan A: 10 ml/kg por deposición', 'Continuar alimentación normal', 'Zinc 10-20 mg/día por 10 días', 'Probióticos', 'Control en 24-48h si no mejora'],
+      urgencia: 'moderada'
+    },
+    apendicitis_sospecha: {
+      nombre: 'Abdomen Agudo - Sospecha de Apendicitis',
+      sintomasRequeridos: ['dolor abdominal'],
+      sintomasOpcionales: ['vómitos', 'fiebre', 'inapetencia', 'náuseas'],
+      signosAlarma: ['palidez extrema'],
+      puntoBase: 70,
+      tratamiento: ['🚨 REFERIR URGENTEMENTE A CIRUGÍA', 'Nada por vía oral', 'Evaluación quirúrgica inmediata', 'NO administrar analgésicos antes de evaluación', 'Monitoreo de signos vitales'],
+      urgencia: 'critica'
+    },
+    estreñimiento: {
+      nombre: 'Estreñimiento',
+      sintomasRequeridos: ['estreñimiento'],
+      sintomasOpcionales: ['dolor abdominal'],
+      signosAlarma: [],
+      puntoBase: 50,
+      tratamiento: ['Aumentar ingesta de agua', 'Dieta rica en fibra', 'Ejercicio regular', 'Laxantes osmóticos si necesario (lactulosa)', 'Evaluación si persiste >2 semanas'],
+      urgencia: 'leve'
+    },
+
+    // NEUROLOGICAS
+    meningitis_sospecha: {
+      nombre: 'Sospecha de Meningitis',
+      sintomasRequeridos: ['fiebre'],
+      sintomasOpcionales: ['vómitos', 'irritabilidad', 'decaimiento', 'somnolencia'],
+      signosAlarma: ['rigidez nuca', 'letargo', 'cianosis', 'palidez extrema'],
+      puntoBase: 90,
+      tratamiento: ['🚨🚨 EMERGENCIA - REFERIR INMEDIATAMENTE', 'Ceftriaxona IV 100 mg/kg si disponible', 'Acceso venoso', 'Monitoreo continuo', 'Punción lumbar en hospital', 'NO RETRASAR EL TRATAMIENTO'],
+      urgencia: 'critica'
+    },
+    convulsion_febril: {
+      nombre: 'Convulsión Febril',
+      sintomasRequeridos: ['fiebre'],
+      sintomasOpcionales: ['somnolencia', 'decaimiento'],
+      signosAlarma: ['letargo'],
+      puntoBase: 60,
+      tratamiento: ['Antitérmicos agresivos', 'Observación', 'Buscar foco infeccioso', 'Educación a padres sobre manejo de crisis', 'Si >15 min o focal: referir para descartar meningitis'],
+      urgencia: 'moderada'
+    },
+
+    // GENERALES
+    sindrome_febril: {
+      nombre: 'Síndrome Febril sin Foco',
+      sintomasRequeridos: ['fiebre'],
+      sintomasOpcionales: ['decaimiento', 'irritabilidad', 'inapetencia'],
+      signosAlarma: [],
+      puntoBase: 50,
+      tratamiento: ['Antitérmicos (paracetamol 15 mg/kg o ibuprofeno 10 mg/kg)', 'Hidratación adecuada', 'Observación', 'Control en 24-48h si persiste', 'Buscar foco infeccioso'],
+      urgencia: 'moderada'
+    }
+  };
+
   const processDiagnostic = () => {
-    // Lógica simplificada de diagnóstico
-    let diagnosticoPrincipal = '';
-    let confianza = 'media';
-    let tratamiento = [];
-    let signosAlarmaCriticos = [];
+    const diagnosticosCandidatos = [];
 
     // Evaluar signos de alarma críticos
-    const signosCriticos = ['cianosis', 'palidez extrema', 'tiraje', 'letargo', 'rigidez nuca'];
-    signosAlarmaCriticos = formData.signosAlarma.filter(signo => signosCriticos.includes(signo));
+    const signosCriticos = ['cianosis', 'palidez extrema', 'tiraje', 'letargo', 'rigidez nuca', 'quejido respiratorio', 'apneas'];
+    const signosAlarmaCriticos = formData.signosAlarma.filter(signo => signosCriticos.includes(signo));
 
-    // Diagnósticos basados en patrones de síntomas
-    if (formData.sintomas.includes('fiebre') && formData.sintomas.includes('tos') && formData.sintomas.includes('dificultad respiratoria')) {
-      if (formData.signosAlarma.includes('tiraje') || formData.signosAlarma.includes('cianosis')) {
-        diagnosticoPrincipal = 'Neumonía con signos de dificultad respiratoria';
-        confianza = 'alta';
-        tratamiento = ['Oxígeno suplementario', 'Antibióticoterapia según protocolo', 'Monitoreo continuo', 'Evaluación por pediatra'];
-      } else {
-        diagnosticoPrincipal = 'Infección respiratoria aguda';
-        confianza = 'media';
-        tratamiento = ['Tratamiento sintomático', 'Antitérmicos según peso', 'Control en 24-48 horas'];
+    // Convertir edad a meses si está disponible
+    let edadMeses = null;
+    if (formData.edad) {
+      const edadMap = {
+        'recien-nacido': 0.5,
+        'lactante': 12,
+        'preescolar': 36,
+        'escolar': 96,
+        'adolescente': 156
+      };
+      edadMeses = edadMap[formData.edad] || null;
+    }
+
+    // Evaluar cada patrón clínico
+    Object.keys(patronesClinicos).forEach(key => {
+      const patron = patronesClinicos[key];
+      let puntos = 0;
+
+      // Verificar restricciones de edad
+      if (patron.edadMax && edadMeses && edadMeses > patron.edadMax) {
+        return; // Saltar este patrón
       }
-    } else if (formData.sintomas.includes('fiebre') && formData.sintomas.includes('vómitos') && formData.sintomas.includes('diarrea')) {
-      diagnosticoPrincipal = 'Gastroenteritis aguda';
-      confianza = formData.signosAlarma.includes('mucosas secas') || formData.signosAlarma.includes('ojos hundidos') ? 'alta' : 'media';
-      tratamiento = ['Rehidratación oral', 'Dieta blanda', 'Probióticos', 'Control de signos de deshidratación'];
-    } else {
+
+      // Verificar síntomas requeridos
+      const sintomasRequeridosPresentes = patron.sintomasRequeridos.every(sintoma =>
+        formData.sintomas.includes(sintoma)
+      );
+
+      if (!sintomasRequeridosPresentes) {
+        return; // No cumple criterios mínimos
+      }
+
+      // Punto base si cumple síntomas requeridos
+      puntos = patron.puntoBase;
+
+      // Sumar puntos por síntomas opcionales presentes
+      const sintomasOpcionalesPresentes = patron.sintomasOpcionales.filter(sintoma =>
+        formData.sintomas.includes(sintoma)
+      ).length;
+      puntos += sintomasOpcionalesPresentes * 3;
+
+      // Sumar puntos significativos por signos de alarma específicos
+      if (patron.signosAlarma && patron.signosAlarma.length > 0) {
+        const signosPresentes = patron.signosAlarma.filter(signo =>
+          formData.signosAlarma.includes(signo)
+        ).length;
+        if (signosPresentes > 0) {
+          puntos += signosPresentes * 10; // Peso importante a signos de alarma
+        }
+      }
+
+      // Calcular nivel de confianza basado en completitud
+      let confianza = 'baja';
+      const totalSintomasPosibles = patron.sintomasRequeridos.length + patron.sintomasOpcionales.length;
+      const sintomasTotalesPresentes = patron.sintomasRequeridos.length + sintomasOpcionalesPresentes;
+      const porcentajeCompletitud = (sintomasTotalesPresentes / totalSintomasPosibles) * 100;
+
+      if (porcentajeCompletitud >= 80 || (patron.signosAlarma && patron.signosAlarma.some(s => formData.signosAlarma.includes(s)))) {
+        confianza = 'alta';
+      } else if (porcentajeCompletitud >= 60) {
+        confianza = 'media';
+      }
+
+      // Si hay signos críticos de esta enfermedad, aumentar urgencia
+      if (patron.urgencia === 'critica' || signosAlarmaCriticos.length > 0) {
+        confianza = 'muy-alta';
+      }
+
+      diagnosticosCandidatos.push({
+        nombre: patron.nombre,
+        puntos: puntos,
+        confianza: confianza,
+        tratamiento: patron.tratamiento,
+        urgencia: patron.urgencia
+      });
+    });
+
+    // Ordenar por puntuación
+    diagnosticosCandidatos.sort((a, b) => b.puntos - a.puntos);
+
+    // Si no hay diagnósticos candidatos, dar diagnóstico genérico
+    if (diagnosticosCandidatos.length === 0) {
       const sintomasPrincipales = formData.sintomas.slice(0, 3).join(', ');
-      diagnosticoPrincipal = `Síndrome clínico con ${sintomasPrincipales}`;
-      confianza = 'baja';
-      tratamiento = ['Evaluación clínica completa', 'Tratamiento sintomático', 'Seguimiento estrecho', 'Reevaluación en 24 horas'];
+      setResultado({
+        diagnosticoPrincipal: `Síndrome clínico con ${sintomasPrincipales}`,
+        confianza: 'baja',
+        tratamiento: [
+          'Evaluación clínica completa presencial',
+          'Tratamiento sintomático',
+          'Seguimiento estrecho',
+          'Reevaluación en 24 horas'
+        ],
+        signosAlarmaCriticos: signosAlarmaCriticos,
+        diagnosticosDiferenciales: []
+      });
+      return;
     }
 
-    if (signosAlarmaCriticos.length > 0) {
-      confianza = 'muy-alta';
-    }
+    // Tomar el principal y hasta 2 diferenciales
+    const principal = diagnosticosCandidatos[0];
+    const diferenciales = diagnosticosCandidatos.slice(1, 3).filter(d => d.puntos >= principal.puntos * 0.7);
 
     setResultado({
-      diagnosticoPrincipal,
-      confianza,
-      tratamiento,
-      signosAlarmaCriticos
+      diagnosticoPrincipal: principal.nombre,
+      confianza: principal.confianza,
+      tratamiento: principal.tratamiento,
+      signosAlarmaCriticos: signosAlarmaCriticos,
+      urgencia: principal.urgencia,
+      diagnosticosDiferenciales: diferenciales
     });
   };
 
@@ -123,10 +336,25 @@ const DiagnosticoAvanzado = () => {
   };
 
   if (resultado) {
+    // Determinar color y clase según urgencia
+    const urgenciaClase = resultado.urgencia ? `urgencia-${resultado.urgencia}` : '';
+    const urgenciaTexto = {
+      'critica': '🚨 EMERGENCIA MÉDICA',
+      'alta': '⚠️ URGENCIA ALTA',
+      'moderada': '⚡ ATENCIÓN PRONTA',
+      'leve': 'ℹ️ CONTROL AMBULATORIO'
+    };
+
     return (
       <section className="section active">
         <div className="container">
           <div className="resultado-diagnostico-avanzado">
+            {resultado.urgencia && (
+              <div className={`nivel-urgencia ${urgenciaClase}`}>
+                <h3>{urgenciaTexto[resultado.urgencia]}</h3>
+              </div>
+            )}
+
             <div className={`diagnostico-principal confianza-${resultado.confianza}`}>
               <h3>🎯 Diagnóstico Principal</h3>
               <h4>{resultado.diagnosticoPrincipal}</h4>
@@ -147,6 +375,28 @@ const DiagnosticoAvanzado = () => {
               </div>
             )}
 
+            {resultado.diagnosticosDiferenciales && resultado.diagnosticosDiferenciales.length > 0 && (
+              <div className="diagnosticos-diferenciales">
+                <h4>🔍 Diagnósticos Diferenciales</h4>
+                <p style={{ fontSize: '0.9em', color: '#666', marginBottom: '15px' }}>
+                  Otros diagnósticos posibles a considerar:
+                </p>
+                {resultado.diagnosticosDiferenciales.map((diag, index) => (
+                  <div key={index} className="diagnostico-diferencial-item">
+                    <div className="diagnostico-header">
+                      <strong>{index + 2}. {diag.nombre}</strong>
+                      <span className={`badge-confianza ${diag.confianza}`}>
+                        {diag.confianza}
+                      </span>
+                    </div>
+                    <div className="diagnostico-puntos">
+                      Probabilidad: {Math.round((diag.puntos / resultado.diagnosticosDiferenciales[0]?.puntos || diag.puntos) * 100)}%
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="plan-tratamiento">
               <h4>💊 Plan de Tratamiento</h4>
               <ul>
@@ -154,6 +404,13 @@ const DiagnosticoAvanzado = () => {
                   <li key={index}>{item}</li>
                 ))}
               </ul>
+            </div>
+
+            <div className="disclaimer-diagnostico">
+              <p>
+                <strong>⚠️ Importante:</strong> Este sistema es una herramienta de apoyo diagnóstico.
+                La evaluación clínica presencial y el juicio médico son indispensables para un diagnóstico definitivo.
+              </p>
             </div>
 
             <div style={{ textAlign: 'center', marginTop: '30px' }}>

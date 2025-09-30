@@ -498,6 +498,136 @@ body {
     padding-bottom: 10px;
 }
 
+/* Niveles de urgencia */
+.nivel-urgencia {
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border: 3px solid;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.urgencia-critica {
+    background-color: #ffebee;
+    border-color: #c62828;
+    color: #b71c1c;
+    animation: pulse-urgencia 2s infinite;
+}
+
+.urgencia-alta {
+    background-color: #fff3e0;
+    border-color: #ef6c00;
+    color: #e65100;
+}
+
+.urgencia-moderada {
+    background-color: #fff9c4;
+    border-color: #f9a825;
+    color: #f57f17;
+}
+
+.urgencia-leve {
+    background-color: #e3f2fd;
+    border-color: #1976d2;
+    color: #0d47a1;
+}
+
+@keyframes pulse-urgencia {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 6px 12px rgba(198, 40, 40, 0.3);
+    }
+}
+
+/* Diagnósticos diferenciales mejorados */
+.diagnosticos-diferenciales {
+    background-color: #f5f5f5;
+    border: 2px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.diagnostico-diferencial-item {
+    background-color: white;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border-left: 4px solid #64b5f6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diagnostico-diferencial-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.diagnostico-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.badge-confianza {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-confianza.muy-alta {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+}
+
+.badge-confianza.alta {
+    background-color: #a5d6a7;
+    color: #1b5e20;
+}
+
+.badge-confianza.media {
+    background-color: #fff9c4;
+    color: #f57f17;
+}
+
+.badge-confianza.baja {
+    background-color: #ffccbc;
+    color: #d84315;
+}
+
+.diagnostico-puntos {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Disclaimer del diagnóstico */
+.disclaimer-diagnostico {
+    background-color: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.disclaimer-diagnostico p {
+    margin: 0;
+    color: #856404;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
 /* Protocolos */
 .protocolos-grid {
     display: grid;
@@ -1721,6 +1851,250 @@ h1, h2, h3, h4, h5, h6 {
 
     .quick-steps {
         justify-content: space-around;
+    }
+}
+
+/* Responsive para Diagnóstico Avanzado - Mobile First */
+@media (max-width: 480px) {
+    /* Formulario de diagnóstico */
+    .diagnostico-avanzado-form {
+        padding: 10px;
+    }
+
+    .paso-diagnostico {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .paso-diagnostico h3 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    /* Grid de síntomas - una columna en móvil */
+    .sintomas-grid,
+    .signos-alarma-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .categoria-sintomas,
+    .signos-categoria {
+        padding: 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .categoria-sintomas h4,
+    .signos-categoria h4 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+    }
+
+    .categoria-sintomas label,
+    .signos-categoria label {
+        font-size: 1em;
+        padding: 8px 0;
+        cursor: pointer;
+    }
+
+    /* Navegación del formulario */
+    .form-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-navigation .btn-primary,
+    .form-navigation .btn-secondary {
+        width: 100%;
+        padding: 14px;
+        font-size: 1.1em;
+    }
+
+    /* Resultados del diagnóstico */
+    .resultado-diagnostico-avanzado {
+        padding: 15px;
+        margin-top: 15px;
+    }
+
+    .nivel-urgencia {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .nivel-urgencia h3 {
+        font-size: 1.2em;
+        margin: 0;
+    }
+
+    .diagnostico-principal {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .diagnostico-principal h3 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .diagnostico-principal h4 {
+        font-size: 1.3em;
+        margin: 8px 0;
+    }
+
+    .confianza {
+        font-size: 1em;
+    }
+
+    /* Alertas críticas */
+    .alertas-criticas {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .alertas-criticas h4 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .alertas-criticas ul {
+        margin-left: 15px;
+        font-size: 0.95em;
+    }
+
+    /* Diagnósticos diferenciales */
+    .diagnosticos-diferenciales {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .diagnosticos-diferenciales h4 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .diagnostico-diferencial-item {
+        padding: 10px 12px;
+        margin-bottom: 10px;
+    }
+
+    .diagnostico-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .diagnostico-header strong {
+        font-size: 1em;
+    }
+
+    .badge-confianza {
+        padding: 4px 10px;
+        font-size: 0.8em;
+    }
+
+    .diagnostico-puntos {
+        font-size: 0.85em;
+        margin-top: 5px;
+    }
+
+    /* Plan de tratamiento */
+    .plan-tratamiento {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .plan-tratamiento h4 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .plan-tratamiento ul {
+        margin-left: 15px;
+        font-size: 0.95em;
+    }
+
+    .plan-tratamiento li {
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }
+
+    /* Disclaimer */
+    .disclaimer-diagnostico {
+        padding: 12px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .disclaimer-diagnostico p {
+        font-size: 0.9em;
+        line-height: 1.5;
+    }
+}
+
+/* Tablet - 481px a 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+    .sintomas-grid,
+    .signos-alarma-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .paso-diagnostico {
+        padding: 18px;
+    }
+
+    .categoria-sintomas,
+    .signos-categoria {
+        padding: 14px;
+    }
+
+    .form-navigation {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .form-navigation .btn-primary,
+    .form-navigation .btn-secondary {
+        width: auto;
+        min-width: 140px;
+        padding: 12px 20px;
+    }
+
+    .resultado-diagnostico-avanzado {
+        padding: 18px;
+    }
+
+    .diagnostico-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* Desktop pequeño - 769px a 991px */
+@media (min-width: 769px) and (max-width: 991px) {
+    .sintomas-grid,
+    .signos-alarma-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+    }
+
+    .resultado-diagnostico-avanzado {
+        padding: 20px;
+    }
+}
+
+/* Desktop grande - 992px+ */
+@media (min-width: 992px) {
+    .sintomas-grid,
+    .signos-alarma-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 15px !important;
+    }
+
+    .diagnostico-diferencial-item:hover {
+        transform: translateX(5px);
     }
 }
 
