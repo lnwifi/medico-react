@@ -140,13 +140,36 @@ function RutasVisitas() {
 
   const extraerCoordenadas = (gpsLink) => {
     try {
-      const patterns = [/q=(-?\d+\.?\d*),(-?\d+\.?\d*)/, /@(-?\d+\.?\d*),(-?\d+\.?\d*)/, /ll=(-?\d+\.?\d*),(-?\d+\.?\d*)/];
+      if (!gpsLink) return null;
+
+      // Verificar si es un enlace acortado (goo.gl o maps.app.goo.gl)
+      if (gpsLink.includes('goo.gl') || gpsLink.includes('maps.app.goo.gl')) {
+        alert('⚠️ Por favor, usa el enlace completo de Google Maps en lugar del enlace acortado.\n\n1. Abre el enlace en el navegador\n2. Copia la URL completa de la barra de direcciones\n3. Pégala en el campo GPS');
+        return null;
+      }
+
+      // Patrones para diferentes formatos de Google Maps
+      const patterns = [
+        /q=(-?\d+\.?\d*),(-?\d+\.?\d*)/,           // ?q=lat,lng
+        /@(-?\d+\.?\d*),(-?\d+\.?\d*)/,            // @lat,lng
+        /ll=(-?\d+\.?\d*),(-?\d+\.?\d*)/,          // ll=lat,lng
+        /3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)/,         // 3dlat!4dlng
+        /!3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)/,        // !3dlat!4dlng
+        /8m2!3d(-?\d+\.?\d*)!4d(-?\d+\.?\d*)/      // 8m2!3dlat!4dlng
+      ];
+
       for (let pattern of patterns) {
         const match = gpsLink.match(pattern);
-        if (match) return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+        if (match) {
+          return {
+            lat: parseFloat(match[1]),
+            lng: parseFloat(match[2])
+          };
+        }
       }
       return null;
     } catch (error) {
+      console.error('Error extrayendo coordenadas:', error);
       return null;
     }
   };
