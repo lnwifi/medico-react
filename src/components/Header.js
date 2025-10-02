@@ -70,13 +70,19 @@ const Header = ({ activeSection, setActiveSection }) => {
             >
               Vacunación
             </button>
-            <button 
+            <button
               className={`nav-btn ${activeSection === 'historial' ? 'active' : ''}`}
               onClick={() => handleNavClick('historial')}
             >
               Historial
             </button>
-            <button 
+            <button
+              className={`nav-btn ${activeSection === 'rutas' ? 'active' : ''}`}
+              onClick={() => handleNavClick('rutas')}
+            >
+              🗺️ Rutas
+            </button>
+            <button
               className="theme-toggle"
               onClick={toggleTheme}
               title={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}

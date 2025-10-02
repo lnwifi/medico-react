@@ -11,6 +11,7 @@ import Emergencias from './components/Emergencias';
 import VacunacionAvanzada from './components/VacunacionAvanzada';
 import AlgoritmosEmergencia from './components/AlgoritmosEmergencia';
 import History from './components/History';
+import RutasVisitas from './components/RutasVisitas';
 import Footer from './components/Footer';
 import InstallPWA from './components/InstallPWA';
 
@@ -33,6 +34,7 @@ function App() {
             {activeSection === 'algoritmos' && <AlgoritmosEmergencia initialSearch={initialSearch} setInitialSearch={setInitialSearch} />}
             {activeSection === 'vacunacion' && <VacunacionAvanzada initialSearch={initialSearch} setInitialSearch={setInitialSearch} />}
             {activeSection === 'historial' && <History setActiveSection={setActiveSection} setInitialSearch={setInitialSearch} />}
+            {activeSection === 'rutas' ? <RutasVisitas /> : null}
           </main>
           
           <Footer />

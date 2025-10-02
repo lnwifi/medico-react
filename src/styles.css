@@ -29,6 +29,11 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.main {
+    min-height: calc(100vh - 200px);
+    padding: 20px;
+}
+
 .container {
     width: 90%;
     max-width: 1200px;
@@ -136,7 +141,7 @@ body {
 }
 
 .section {
-    display: none;
+    display: block;
     padding: 40px 0;
     background-color: var(--bg-secondary);
     margin-top: 20px;
@@ -2221,5 +2226,843 @@ h1, h2, h3, h4, h5, h6 {
     input[type="text"],
     select {
         font-size: 16px !important; /* Evita zoom en iOS */
+    }
+}
+
+/* Estilos para Rutas de Visitas */
+.rutas-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.rutas-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #2196F3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.btn-secondary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.form-paciente {
+    background-color: var(--bg-secondary);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.form-paciente h3 {
+    margin-top: 0;
+    color: #2196F3;
+    margin-bottom: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.ruta-optimizada {
+    background-color: var(--bg-secondary);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.ruta-optimizada h3 {
+    margin-top: 0;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.punto-inicio {
+    background-color: #E3F2FD;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid #2196F3;
+    font-size: 0.95em;
+}
+
+[data-theme="dark"] .punto-inicio {
+    background-color: rgba(33, 150, 243, 0.2);
+}
+
+.resumen-ruta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2196F3;
+}
+
+.btn-mapa {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.lista-ruta {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item-ruta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+}
+
+.numero-orden {
+    background-color: #4CAF50;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+.info-ruta {
+    flex: 1;
+}
+
+.info-ruta h4 {
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+}
+
+.domicilio-ruta,
+.distancia-ruta,
+.visitas-info {
+    margin: 4px 0;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.distancia-ruta {
+    color: #FF9800;
+    font-weight: 500;
+}
+
+.btn-gps,
+.btn-gps-card {
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-gps:hover,
+.btn-gps-card:hover {
+    background-color: #E64A19;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 87, 34, 0.3);
+}
+
+.lista-pacientes {
+    margin-top: 30px;
+}
+
+.lista-pacientes h3 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.pacientes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.paciente-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paciente-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px var(--shadow);
+}
+
+.paciente-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.paciente-header h4 {
+    margin: 0;
+    color: #2196F3;
+    font-size: 1.1em;
+}
+
+.paciente-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3em;
+    padding: 4px;
+    transition: transform 0.2s ease;
+}
+
+.btn-icon:hover {
+    transform: scale(1.2);
+}
+
+.paciente-info {
+    margin-bottom: 15px;
+}
+
+.paciente-info p {
+    margin: 8px 0;
+    font-size: 0.95em;
+    color: var(--text-primary);
+}
+
+.paciente-info strong {
+    color: var(--text-secondary);
+}
+
+.visitas-programadas {
+    background-color: var(--bg-primary);
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.observaciones {
+    background-color: #FFF3E0;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    border-left: 3px solid #FF9800;
+}
+
+[data-theme="dark"] .observaciones {
+    background-color: rgba(255, 152, 0, 0.1);
+}
+
+.btn-gps-card {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Estilos para agrupación por localidad */
+.grupo-localidad {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+}
+
+.titulo-localidad {
+    color: #2196F3;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #2196F3;
+    font-size: 1.3em;
+}
+
+/* Estilos para pacientes visitados */
+.paciente-card.visitado {
+    opacity: 0.6;
+    background-color: #e8f5e9;
+    border-left: 4px solid #4CAF50;
+}
+
+[data-theme="dark"] .paciente-card.visitado {
+    background-color: rgba(76, 175, 80, 0.2);
+}
+
+.paciente-card.visitado .paciente-header h4 {
+    text-decoration: line-through;
+    color: #4CAF50;
+}
+
+/* Estilos para selección de pacientes */
+.seleccion-controles {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-seleccion {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background-color: #2196F3;
+    color: white;
+}
+
+.btn-seleccion:hover {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.contador-seleccion {
+    font-weight: 600;
+    color: #2196F3;
+    font-size: 1.1em;
+    margin-left: auto;
+}
+
+.paciente-card.seleccionado {
+    border: 3px solid #2196F3;
+    box-shadow: 0 0 15px rgba(33, 150, 243, 0.3);
+    transform: scale(1.02);
+}
+
+.paciente-card {
+    transition: all 0.3s ease;
+}
+
+.paciente-card:hover {
+    box-shadow: 0 8px 20px var(--shadow);
+}
+
+/* Buscador de pacientes */
+.buscador-container {
+    position: relative;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.input-buscador {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px 50px 15px 20px;
+    font-size: 1em;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-buscador:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.btn-limpiar-busqueda {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.btn-limpiar-busqueda:hover {
+    color: #f44336;
+}
+
+/* Pacientes que necesitan visita hoy */
+.paciente-card.necesita-visita {
+    border: 3px solid #FF9800;
+    background-color: #FFF3E0;
+    animation: pulse-visita 2s infinite;
+}
+
+[data-theme="dark"] .paciente-card.necesita-visita {
+    background-color: rgba(255, 152, 0, 0.15);
+}
+
+@keyframes pulse-visita {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(255, 152, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 152, 0, 0.7);
+    }
+}
+
+.badge-visita-hoy {
+    display: inline-block;
+    background-color: #FF9800;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    margin-left: 10px;
+    font-weight: 600;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Estilos para visitas programadas mañana */
+.paciente-card.necesita-visita-manana {
+    border: 2px solid #2196F3;
+    background-color: #E3F2FD;
+}
+
+[data-theme="dark"] .paciente-card.necesita-visita-manana {
+    background-color: rgba(33, 150, 243, 0.15);
+}
+
+.badge-visita-manana {
+    display: inline-block;
+    background-color: #2196F3;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+/* Responsive para rutas */
+@media (max-width: 768px) {
+    .rutas-container {
+        padding: 10px;
+    }
+
+    /* Buscador responsive */
+    .buscador-container {
+        margin: 15px 0;
+        width: 100%;
+        padding: 0;
+    }
+
+    .input-buscador {
+        padding: 12px 45px 12px 15px;
+        font-size: 16px; /* Evita zoom en iOS */
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .btn-limpiar-busqueda {
+        right: 8px;
+        font-size: 1.1em;
+    }
+
+    /* Controles de selección responsive */
+    .seleccion-controles {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .btn-seleccion {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .contador-seleccion {
+        margin-left: 0;
+        text-align: center;
+        padding: 8px;
+        background-color: rgba(33, 150, 243, 0.1);
+        border-radius: 6px;
+    }
+
+    /* Badge visita hoy responsive */
+    .badge-visita-hoy {
+        display: block;
+        margin-left: 0;
+        margin-top: 5px;
+        font-size: 0.7em;
+        width: fit-content;
+    }
+
+    .paciente-header h4 {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .form-paciente {
+        padding: 15px;
+    }
+
+    .form-paciente h3 {
+        font-size: 1.2em;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .form-group small {
+        font-size: 0.8em;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+
+    .resumen-ruta {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .stat-value {
+        font-size: 1.3em;
+    }
+
+    .item-ruta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .numero-orden {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+
+    .info-ruta h4 {
+        font-size: 1em;
+    }
+
+    .domicilio-ruta,
+    .distancia-ruta,
+    .visitas-info {
+        font-size: 0.85em;
+    }
+
+    .btn-gps {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .pacientes-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .paciente-card {
+        padding: 15px;
+    }
+
+    .paciente-header h4 {
+        font-size: 1em;
+    }
+
+    .paciente-info p {
+        font-size: 0.9em;
+    }
+
+    .rutas-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rutas-header button {
+        width: 100%;
+        padding: 14px;
+        font-size: 1em;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .ruta-optimizada {
+        padding: 15px;
+    }
+
+    .ruta-optimizada h3 {
+        font-size: 1.2em;
+    }
+
+    .lista-pacientes h3 {
+        font-size: 1.1em;
+    }
+}
+
+/* Responsive para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pacientes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .resumen-ruta {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Ajustes para móviles pequeños */
+@media (max-width: 480px) {
+    .rutas-container {
+        padding: 5px;
+    }
+
+    .section {
+        padding: 20px 0;
+        margin-top: 10px;
+    }
+
+    h2 {
+        font-size: 1.3em;
+        padding: 0 10px;
+    }
+
+    /* Buscador en móviles pequeños */
+    .buscador-container {
+        width: 100%;
+        margin: 10px 0;
+        padding: 0;
+    }
+
+    .input-buscador {
+        padding: 10px 40px 10px 12px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .input-buscador::placeholder {
+        font-size: 0.9em;
+    }
+
+    /* Controles de selección en móviles pequeños */
+    .seleccion-controles {
+        padding: 10px;
+    }
+
+    .btn-seleccion {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    .contador-seleccion {
+        font-size: 0.95em;
+    }
+
+    /* Rutas header en móviles */
+    .rutas-header {
+        gap: 8px;
+    }
+
+    .rutas-header button {
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
+
+    /* Badge visita hoy en móviles */
+    .badge-visita-hoy {
+        font-size: 0.65em;
+        padding: 3px 8px;
+    }
+
+    .badge-visita-manana {
+        font-size: 0.65em;
+        padding: 3px 8px;
+    }
+
+    .form-paciente {
+        padding: 12px;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-size: 0.9em;
+    }
+
+    .form-group small {
+        font-size: 0.75em;
+    }
+
+    .btn-icon {
+        font-size: 1.1em;
+    }
+
+    .paciente-actions {
+        gap: 5px;
+    }
+
+    /* Checkbox más grande en móviles */
+    .paciente-header input[type="checkbox"] {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    /* Ajuste título localidad */
+    .titulo-localidad {
+        font-size: 1.1em;
+    }
+
+    /* Punto inicio en móviles */
+    .punto-inicio {
+        padding: 10px;
+        font-size: 0.85em;
     }
 }
