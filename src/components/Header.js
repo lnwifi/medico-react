@@ -90,6 +90,9 @@ const Header = ({ activeSection, setActiveSection }) => {
               <span>{isDarkMode ? '☀️' : '🌙'}</span>
               <span>{isDarkMode ? 'Claro' : 'Oscuro'}</span>
             </button>
+            <div className="menu-footer">
+              App creada con mucho ❤️ por Lucas Navarro
+            </div>
           </nav>
         </div>
       </header>

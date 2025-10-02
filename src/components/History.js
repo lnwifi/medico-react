@@ -68,20 +68,22 @@ const History = ({ setActiveSection, setInitialSearch }) => {
   };
 
   return (
-    <div style={{ 
-      backgroundColor: colors.background, 
+    <div style={{
+      backgroundColor: colors.background,
       color: colors.text,
       minHeight: '100vh',
       padding: '20px'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: '30px'
+          marginBottom: '30px',
+          flexWrap: 'wrap',
+          gap: '15px'
         }}>
-          <h2>📋 Historial de Consultas</h2>
+          <h2 style={{ margin: 0, fontSize: 'clamp(20px, 5vw, 28px)' }}>📋 Historial de Consultas</h2>
           {consultHistory.length > 0 && (
             <button
               onClick={clearHistory}
@@ -92,7 +94,8 @@ const History = ({ setActiveSection, setInitialSearch }) => {
                 padding: '10px 20px',
                 borderRadius: '6px',
                 cursor: 'pointer',
-                fontSize: '14px'
+                fontSize: '14px',
+                whiteSpace: 'nowrap'
               }}
             >
               Limpiar Historial
@@ -123,42 +126,45 @@ const History = ({ setActiveSection, setInitialSearch }) => {
                 key={item.id}
                 style={{
                   backgroundColor: colors.surface,
-                  padding: '20px',
+                  padding: '15px',
                   borderRadius: '12px',
                   border: `1px solid ${colors.border}`,
                   display: 'flex',
                   justifyContent: 'space-between',
-                  alignItems: 'center',
+                  alignItems: 'flex-start',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  gap: '10px'
                 }}
                 onClick={() => handleItemClick(item)}
                 onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = colors.surfaceVariant;
-                  e.target.style.borderColor = colors.primary;
+                  e.currentTarget.style.backgroundColor = colors.surfaceVariant;
+                  e.currentTarget.style.borderColor = colors.primary;
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = colors.surface;
-                  e.target.style.borderColor = colors.border;
+                  e.currentTarget.style.backgroundColor = colors.surface;
+                  e.currentTarget.style.borderColor = colors.border;
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flex: 1 }}>
-                  <div style={{ fontSize: '24px' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: '24px', flexShrink: 0 }}>
                     {getTypeIcon(item.type)}
                   </div>
-                  <div>
-                    <h3 style={{ 
-                      margin: 0, 
-                      fontSize: '18px',
-                      color: colors.text
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <h3 style={{
+                      margin: 0,
+                      fontSize: 'clamp(16px, 4vw, 18px)',
+                      color: colors.text,
+                      wordBreak: 'break-word'
                     }}>
                       {item.name}
                     </h3>
-                    <div style={{ 
-                      display: 'flex', 
-                      gap: '15px', 
-                      marginTop: '5px',
-                      fontSize: '14px',
+                    <div style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '8px',
+                      marginTop: '8px',
+                      fontSize: 'clamp(12px, 3vw, 14px)',
                       color: colors.textSecondary,
                       alignItems: 'center'
                     }}>
@@ -168,12 +174,12 @@ const History = ({ setActiveSection, setInitialSearch }) => {
                       {item.fullData && (
                         <>
                           <span>•</span>
-                          <span style={{ 
+                          <span style={{
                             backgroundColor: colors.primary,
                             color: 'white',
-                            padding: '2px 6px',
+                            padding: '2px 8px',
                             borderRadius: '10px',
-                            fontSize: '12px',
+                            fontSize: '11px',
                             fontWeight: 'bold'
                           }}>
                             DETALLADO
@@ -183,10 +189,11 @@ const History = ({ setActiveSection, setInitialSearch }) => {
                     </div>
                     {item.details && (
                       <div style={{
-                        fontSize: '13px',
+                        fontSize: 'clamp(11px, 3vw, 13px)',
                         color: colors.textSecondary,
-                        marginTop: '3px',
-                        fontStyle: 'italic'
+                        marginTop: '5px',
+                        fontStyle: 'italic',
+                        wordBreak: 'break-word'
                       }}>
                         {item.details}
                       </div>
@@ -205,7 +212,8 @@ const History = ({ setActiveSection, setInitialSearch }) => {
                     cursor: 'pointer',
                     padding: '8px',
                     borderRadius: '4px',
-                    fontSize: '16px'
+                    fontSize: '18px',
+                    flexShrink: 0
                   }}
                   onMouseEnter={(e) => {
                     e.target.style.color = colors.error;

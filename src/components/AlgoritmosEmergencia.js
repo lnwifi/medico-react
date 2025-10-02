@@ -131,9 +131,9 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
       }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           {/* Header con cronómetro */}
-          <div style={{ 
+          <div style={{
             backgroundColor: colors.surface,
-            padding: '20px',
+            padding: '15px',
             borderRadius: '12px',
             border: `1px solid ${colors.border}`,
             marginBottom: '20px'
@@ -145,30 +145,32 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
               flexWrap: 'wrap',
               gap: '15px'
             }}>
-              <div>
-                <h2 style={{ margin: 0, color: colors.primary }}>
+              <div style={{ flex: '1', minWidth: '200px' }}>
+                <h2 style={{ margin: 0, color: colors.primary, fontSize: 'clamp(18px, 4vw, 24px)' }}>
                   {categorias[algoritmo.categoria].icon} {algoritmo.nombre}
                 </h2>
-                <p style={{ margin: '5px 0 0 0', color: colors.textSecondary }}>
+                <p style={{ margin: '5px 0 0 0', color: colors.textSecondary, fontSize: 'clamp(12px, 3vw, 14px)' }}>
                   Paso {pasoActual + 1} de {algoritmo.pasos.length}
                 </p>
               </div>
-              
+
               {/* Cronómetro */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '15px'
+                gap: '10px',
+                flexWrap: 'wrap',
+                justifyContent: 'center'
               }}>
                 <div style={{
                   backgroundColor: cronometroActivo ? colors.error : colors.textSecondary,
                   color: 'white',
-                  padding: '15px 25px',
+                  padding: 'clamp(10px, 3vw, 15px) clamp(15px, 4vw, 25px)',
                   borderRadius: '10px',
-                  fontSize: '32px',
+                  fontSize: 'clamp(24px, 6vw, 32px)',
                   fontWeight: 'bold',
                   fontFamily: 'monospace',
-                  minWidth: '120px',
+                  minWidth: '100px',
                   textAlign: 'center'
                 }}>
                   {formatearTiempo(cronometro)}
@@ -179,10 +181,12 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
                     backgroundColor: cronometroActivo ? colors.warning : colors.success,
                     color: 'white',
                     border: 'none',
-                    padding: '12px 20px',
+                    padding: 'clamp(10px, 2vw, 12px) clamp(15px, 3vw, 20px)',
                     borderRadius: '8px',
                     cursor: 'pointer',
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    fontSize: 'clamp(12px, 3vw, 14px)',
+                    whiteSpace: 'nowrap'
                   }}
                 >
                   {cronometroActivo ? '⏸️ Pausar' : '▶️ Reanudar'}
@@ -211,18 +215,19 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
           {/* Contenido del paso actual */}
           <div style={{
             backgroundColor: colors.surface,
-            padding: '30px',
+            padding: 'clamp(15px, 4vw, 30px)',
             borderRadius: '12px',
             border: `1px solid ${colors.border}`,
             marginBottom: '20px'
           }}>
             <h3 style={{
               color: colors.primary,
-              fontSize: '24px',
-              marginBottom: '20px',
+              fontSize: 'clamp(18px, 4vw, 24px)',
+              marginBottom: '15px',
               display: 'flex',
               alignItems: 'center',
-              gap: '10px'
+              gap: '10px',
+              flexWrap: 'wrap'
             }}>
               {paso.tipo === 'evaluacion' && '🔍'}
               {paso.tipo === 'procedimiento' && '🏥'}
@@ -271,8 +276,8 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
             {paso.tipo === 'compresiones' && paso.parametros && (
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                gap: '20px',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
+                gap: '15px',
                 marginBottom: '20px'
               }}>
                 <div style={{
@@ -392,10 +397,10 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            gap: '15px',
+            gap: '10px',
             flexWrap: 'wrap'
           }}>
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
               <button
                 onClick={retrocederPaso}
                 disabled={pasoActual === 0}
@@ -403,26 +408,29 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
                   backgroundColor: pasoActual === 0 ? colors.textSecondary : colors.secondary,
                   color: 'white',
                   border: 'none',
-                  padding: '12px 20px',
+                  padding: 'clamp(10px, 2vw, 12px) clamp(15px, 3vw, 20px)',
                   borderRadius: '8px',
                   cursor: pasoActual === 0 ? 'not-allowed' : 'pointer',
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  fontSize: 'clamp(12px, 3vw, 14px)',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 ◀️ Anterior
               </button>
-              
+
               <button
                 onClick={avanzarPaso}
                 style={{
                   backgroundColor: colors.primary,
                   color: 'white',
                   border: 'none',
-                  padding: '12px 20px',
+                  padding: 'clamp(10px, 2vw, 12px) clamp(15px, 3vw, 20px)',
                   borderRadius: '8px',
                   cursor: 'pointer',
                   fontWeight: 'bold',
-                  fontSize: '16px'
+                  fontSize: 'clamp(12px, 3vw, 16px)',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 {esUltimoPaso ? '✅ Finalizar' : '▶️ Siguiente'}
@@ -435,10 +443,12 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
                 backgroundColor: colors.error,
                 color: 'white',
                 border: 'none',
-                padding: '12px 20px',
+                padding: 'clamp(10px, 2vw, 12px) clamp(15px, 3vw, 20px)',
                 borderRadius: '8px',
                 cursor: 'pointer',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontSize: 'clamp(12px, 3vw, 14px)',
+                whiteSpace: 'nowrap'
               }}
             >
               ❌ Detener
@@ -459,18 +469,18 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Header */}
-        <div style={{ 
+        <div style={{
           textAlign: 'center',
           marginBottom: '30px',
-          padding: '25px',
+          padding: 'clamp(15px, 4vw, 25px)',
           backgroundColor: colors.surface,
           borderRadius: '12px',
           border: `1px solid ${colors.border}`
         }}>
-          <h2 style={{ color: colors.primary, marginBottom: '10px' }}>
+          <h2 style={{ color: colors.primary, marginBottom: '10px', fontSize: 'clamp(20px, 5vw, 28px)' }}>
             🚨 Algoritmos de Emergencias Pediátricas
           </h2>
-          <p style={{ color: colors.textSecondary, fontSize: '16px' }}>
+          <p style={{ color: colors.textSecondary, fontSize: 'clamp(14px, 3vw, 16px)' }}>
             Protocolos paso a paso con cronómetro integrado para emergencias médicas
           </p>
         </div>
@@ -516,7 +526,7 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
         {/* Lista de algoritmos */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))',
           gap: '20px'
         }}>
           {Object.values(algoritmosEmergencia).map((algoritmo) => {
@@ -531,7 +541,7 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
                   backgroundColor: colors.surface,
                   border: `1px solid ${colors.border}`,
                   borderRadius: '12px',
-                  padding: '25px',
+                  padding: 'clamp(15px, 4vw, 25px)',
                   cursor: esAplicable ? 'pointer' : 'not-allowed',
                   opacity: esAplicable ? 1 : 0.6,
                   transition: 'all 0.2s ease'
@@ -539,53 +549,55 @@ const AlgoritmosEmergencia = ({ initialSearch, setInitialSearch }) => {
                 onClick={() => esAplicable && iniciarAlgoritmo(algoritmo)}
                 onMouseEnter={(e) => {
                   if (esAplicable) {
-                    e.target.style.backgroundColor = colors.surfaceVariant;
-                    e.target.style.borderColor = categoria.color;
+                    e.currentTarget.style.backgroundColor = colors.surfaceVariant;
+                    e.currentTarget.style.borderColor = categoria.color;
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (esAplicable) {
-                    e.target.style.backgroundColor = colors.surface;
-                    e.target.style.borderColor = colors.border;
+                    e.currentTarget.style.backgroundColor = colors.surface;
+                    e.currentTarget.style.borderColor = colors.border;
                   }
                 }}
               >
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  marginBottom: '15px'
+                  marginBottom: '15px',
+                  gap: '12px'
                 }}>
-                  <span style={{ 
-                    fontSize: '32px', 
-                    marginRight: '15px' 
+                  <span style={{
+                    fontSize: 'clamp(24px, 6vw, 32px)',
+                    flexShrink: 0
                   }}>
                     {categoria.icon}
                   </span>
-                  <div>
-                    <h3 style={{ 
-                      margin: 0, 
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <h3 style={{
+                      margin: 0,
                       color: categoria.color,
-                      fontSize: '20px'
+                      fontSize: 'clamp(16px, 4vw, 20px)',
+                      wordBreak: 'break-word'
                     }}>
                       {algoritmo.nombre}
                     </h3>
-                    <p style={{ 
-                      margin: '5px 0 0 0', 
+                    <p style={{
+                      margin: '5px 0 0 0',
                       color: colors.textSecondary,
-                      fontSize: '14px'
+                      fontSize: 'clamp(12px, 3vw, 14px)'
                     }}>
                       {categoria.nombre} • {algoritmo.edadMinima}-{algoritmo.edadMaxima} años
                     </p>
                   </div>
                 </div>
 
-                <p style={{ 
+                <p style={{
                   color: colors.text,
-                  fontSize: '14px',
+                  fontSize: 'clamp(12px, 3vw, 14px)',
                   lineHeight: '1.5',
                   marginBottom: '15px'
                 }}>
-                  {algoritmo.pasos.length} pasos • 
+                  {algoritmo.pasos.length} pasos •
                   {algoritmo.duracionTotal && ` ~${Math.ceil(algoritmo.duracionTotal / 60)} minutos`}
                 </p>
 
