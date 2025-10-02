@@ -51,7 +51,8 @@ function RutasVisitas() {
       setError(null);
       const data = await googleSheetsService.obtenerPacientes();
       setPacientes(data);
-      verificarRecordatorios();
+      // Verificar recordatorios con los datos recién cargados
+      verificarRecordatoriosConDatos(data);
     } catch (err) {
       setError('Error al cargar pacientes desde Google Sheets');
       console.error(err);
@@ -329,7 +330,8 @@ function RutasVisitas() {
     }));
   };
 
-  const verificarRecordatorios = () => {
+  // Función auxiliar que recibe los pacientes como parámetro
+  const verificarRecordatoriosConDatos = (pacientesData) => {
     const hoy = new Date();
     const hoyStr = hoy.toISOString().split('T')[0];
 
@@ -337,7 +339,6 @@ function RutasVisitas() {
     manana.setDate(manana.getDate() + 1);
     const mananaStr = manana.toISOString().split('T')[0];
 
-    // Ahora usa el estado pacientes en lugar de localStorage
     const programadas = JSON.parse(localStorage.getItem('visitasProgramadas') || '{}');
 
     const recordatoriosHoy = [];
@@ -345,7 +346,7 @@ function RutasVisitas() {
 
     Object.keys(programadas).forEach(pacienteId => {
       const visita = programadas[pacienteId];
-      const paciente = pacientes.find(p => p.id === parseInt(pacienteId));
+      const paciente = pacientesData.find(p => p.id === parseInt(pacienteId));
 
       if (paciente) {
         if (visita.fecha === hoyStr) {
@@ -370,6 +371,11 @@ function RutasVisitas() {
     if (mensaje) {
       alert(mensaje);
     }
+  };
+
+  // Función que usa el estado actual de pacientes
+  const verificarRecordatorios = () => {
+    verificarRecordatoriosConDatos(pacientes);
   };
 
   const filtrarPacientes = () => {

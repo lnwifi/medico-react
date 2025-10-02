@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { HistoryProvider } from './contexts/HistoryContext';
@@ -14,10 +14,71 @@ import History from './components/History';
 import RutasVisitas from './components/RutasVisitas';
 import Footer from './components/Footer';
 import InstallPWA from './components/InstallPWA';
+import { googleSheetsService } from './services/googleSheetsService';
 
 function App() {
   const [activeSection, setActiveSection] = useState('calculadora');
   const [initialSearch, setInitialSearch] = useState('');
+
+  // Verificar recordatorios al cargar la app
+  useEffect(() => {
+    const verificarRecordatoriosInicio = async () => {
+      try {
+        const hoy = new Date().toISOString().split('T')[0];
+        const ultimaVerificacion = localStorage.getItem('ultimaVerificacionRecordatorios');
+
+        // Solo mostrar si no se ha verificado hoy
+        if (ultimaVerificacion === hoy) {
+          return;
+        }
+
+        const pacientes = await googleSheetsService.obtenerPacientes();
+        const programadas = JSON.parse(localStorage.getItem('visitasProgramadas') || '{}');
+
+        const hoyStr = hoy;
+        const manana = new Date();
+        manana.setDate(manana.getDate() + 1);
+        const mananaStr = manana.toISOString().split('T')[0];
+
+        const recordatoriosHoy = [];
+        const recordatoriosManana = [];
+
+        Object.keys(programadas).forEach(pacienteId => {
+          const visita = programadas[pacienteId];
+          const paciente = pacientes.find(p => p.id === parseInt(pacienteId));
+
+          if (paciente) {
+            if (visita.fecha === hoyStr) {
+              recordatoriosHoy.push(paciente.nombre);
+            } else if (visita.fecha === mananaStr) {
+              recordatoriosManana.push(paciente.nombre);
+            }
+          }
+        });
+
+        let mensaje = '';
+
+        if (recordatoriosHoy.length > 0) {
+          mensaje += `🔔 VISITAS PROGRAMADAS PARA HOY:\n\n${recordatoriosHoy.join('\n')}`;
+        }
+
+        if (recordatoriosManana.length > 0) {
+          if (mensaje) mensaje += '\n\n';
+          mensaje += `⏰ RECORDATORIO - Visitas para MAÑANA:\n\n${recordatoriosManana.join('\n')}`;
+        }
+
+        if (mensaje) {
+          alert(mensaje);
+          // Marcar que ya se verificó hoy
+          localStorage.setItem('ultimaVerificacionRecordatorios', hoy);
+        }
+      } catch (error) {
+        console.error('Error al verificar recordatorios:', error);
+      }
+    };
+
+    verificarRecordatoriosInicio();
+  }, []);
 
   return (
     <ThemeProvider>
